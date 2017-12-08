@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AuthGuard } from './guards/index';
-import { AuthenticationService, UserService } from './services/index';
+import { AuthenticationService, UserService, MessageService } from './services/index';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { HomeComponent } from './home/home.component';
@@ -26,7 +26,8 @@ import { LoginComponent } from './login/login.component';
   providers: [
     AuthGuard,
     AuthenticationService,
-    UserService
+    UserService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

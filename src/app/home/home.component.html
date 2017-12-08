@@ -7,5 +7,11 @@
           <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
       </ul>
   </div>
+  <div>
+   Messages from secure api end point:
+    <ul>
+        <li *ngFor="let message of messages">{{message.messageId}} {{message.message}}</li>
+    </ul>
+</div>
   <p><a [routerLink]="['/login']">Logout</a></p>
 </div>
