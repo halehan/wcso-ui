@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from '../model/index';
 import { Message } from '../model/index';
-import { UserService } from '../services/index';
-import { MessageService } from '../services/index';
+import { UserService } from '../services/user.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-home',
