@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import { AuthenticationService } from './authentication.service';
 import { Message } from '../model/index';
 
+const url = 'http://localhost:3000/messages';
+
 @Injectable()
 export class MessageService {
 
@@ -14,15 +16,23 @@ export class MessageService {
     private authenticationService: AuthenticationService) {
 }
 
-getMessages(): Observable<Message[]> {
-       // add authorization header with jwt token
-      const headers = new Headers({ 'authorization':  this.authenticationService.token });
-      const options = new RequestOptions({ headers: headers });
+getAll(): Observable<Message[]> {
+  return this.http.get(url, this.jwt()).map((response: Response) => response.json());
+}
 
-       // get messages from api
-       return this.http.get('http://localhost:3000/messages', options)
-           .map((response: Response) => response.json());
+getById(id: number) {
+  return this.http.get(url + id, this.jwt()).map((response: Response) => response.json());
+}
 
-   }
+
+   private jwt() {
+    // create authorization header with jwt token
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+    //    const headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+        const headers = new Headers({ 'Authorization': currentUser.token });
+        return new RequestOptions({ headers: headers });
+    }
+}
 
 }

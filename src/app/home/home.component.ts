@@ -18,12 +18,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
       // get messages from secure api end point
-      this.messageService.getMessages()
+      this.messageService.getAll()
           .subscribe(messages => {
               this.messages = messages;
           });
 
-          this.userService.getUsers()
+          this.userService.getAll()
           .subscribe(users => {
               this.users = users;
           });
