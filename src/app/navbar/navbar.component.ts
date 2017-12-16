@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from './navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
+  test = ' Social Media Messenger';
+  homeActive = '';
+  dashActive = '';
+  profileActive = '';
+  vis: boolean;
+  styleCls = '';
+  constructor(public nav: NavbarService ) {}
 
   ngOnInit() {
+    this.vis = this.nav.getVisible();
+    this.styleCls = ((this.nav.getVisible()) ? '' : 'hiden');
+    this.styleCls = ((this.nav.getVisible()) ? '' : 'hiden');
+
+    this.homeActive = this.nav.getHomeActive();
+    this.dashActive = this.nav.getDashActive();
+    this.profileActive = this.nav.getProfileActive();
   }
 
 }

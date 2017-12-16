@@ -16,6 +16,10 @@ export class MessageService {
     private authenticationService: AuthenticationService) {
 }
 
+sendMessage(message: Message) {
+  return this.http.post(url + '/sendmessage', message, this.jwt()).map((response: Response) => response.json());
+}
+
 getAll(): Observable<Message[]> {
   return this.http.get(url, this.jwt()).map((response: Response) => response.json());
 }
@@ -34,5 +38,7 @@ getById(id: number) {
         return new RequestOptions({ headers: headers });
     }
 }
+
+
 
 }
