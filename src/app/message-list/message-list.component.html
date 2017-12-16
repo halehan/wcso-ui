@@ -1,0 +1,34 @@
+<div class="example-container mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyMessageFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+  
+    <mat-table #table [dataSource]="messageDataSource">
+  
+     
+      <!-- Name Column -->
+      <ng-container matColumnDef="message">
+        <mat-header-cell *matHeaderCellDef> Message </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.message}} </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="threadId">
+        <mat-header-cell *matHeaderCellDef> ThreadId </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.threadId}} </mat-cell>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+     <!--   <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>  -->
+        <mat-cell *matCellDef="let element">{{ element.createdTime | date }}</mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
