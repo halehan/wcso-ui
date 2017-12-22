@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessageDetailComponent } from './message-detail.component';
+import { AtableListComponent } from './atable-list.component';
 
-describe('MessageDetailComponent', () => {
-  let component: MessageDetailComponent;
-  let fixture: ComponentFixture<MessageDetailComponent>;
+describe('AtableListComponent', () => {
+  let component: AtableListComponent;
+  let fixture: ComponentFixture<AtableListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageDetailComponent ]
+      declarations: [ AtableListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MessageDetailComponent);
+    fixture = TestBed.createComponent(AtableListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   users: User[] = [];
   messages: Message[] = [];
   count = 0;
+  title = '';
 
   constructor(public nav: NavbarService,
     private userService: UserService,

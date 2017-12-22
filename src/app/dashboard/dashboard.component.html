@@ -1,25 +1,24 @@
-
- <app-navbar></app-navbar>
+<app-navbar></app-navbar>
 
 <div class="container-fluid">
     <div class="row">
       <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="dashboard"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp;Overview <span class="sr-only">(current)</span></a>
+            <a [routerLink]="['/message']"  class="nav-link  " href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; Messages</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;Reports</a>
+            <a [routerLink]="['/dash']"  class="nav-link  active" href="#"><i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp; Reports</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login"><i class="fa fa-users" aria-hidden="true"></i>&nbsp;Users</a>
+            <a [routerLink]="['/user']"  class="nav-link  " href="#"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Users</a>
           </li>
         </ul>
 
       </nav>
 
       <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-        <h1>Dashboard</h1>
+       <h1></h1>
 
         <section class="row text-center placeholders">
           <div class="col-6 col-sm-3 placeholder">
@@ -43,74 +42,11 @@
             <span class="text-muted">Something else</span>
           </div>
         </section>
-        <mat-toolbar>
-            <span>Message List</span>
-          </mat-toolbar>
-        <app-message-list></app-message-list>
-        <hr>
        
-        <app-message-detail></app-message-detail>
       
-
-        <mat-grid-list cols="4" rowHeight="100px">
-            <mat-grid-tile
-                *ngFor="let tile of tiles"
-                [colspan]="tile.cols"
-                [rowspan]="tile.rows"
-                [style.background]="tile.color">
-              {{tile.text}}
-            </mat-grid-tile>
-          </mat-grid-list>
   
-<!--
-        <h2>Users</h2>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Login</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Role</th>
-                <th>Supervisor</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let user of users">
-                 <tr>
-                     <td>{{user.loginId}} </td>
-                     <td>{{user.firstName}} </td>
-                     <td>{{user.lastName}} </td>
-                     <td>{{user.role}} </td>
-                     <td>{{user.supervisor}} </td>
-                 </tr>
-            </tbody>
-          </table>
-        </div>
-        <hr>
 
-        <h2>Messages</h2>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Message Id</th>
-                <th>Message</th>
-                <th>Thread Status</th>
-                <th>Created Time</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let message of messages">
-                 <tr>
-                     <td>{{message.messageId}} </td>
-                     <td>{{message.message}} </td>
-                     <td>{{message.threadStatus}} </td>
-                     <td>{{message.createdTime}} </td>
-                 </tr>
-         </tbody>
-        </table>
-        </div>
-
-      -->
+    
       </main>
     </div>
   </div>  

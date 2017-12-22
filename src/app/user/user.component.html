@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="row">
+     <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a [routerLink]="['/message']"  class="nav-link " href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; Messages</a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/dash']" class="nav-link" href="#"><i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;Reports</a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/user']"  class="nav-link  active " href="#"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Users</a>
+          </li>
+        </ul>
+
+      </nav>   
+
+      <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+        <h1></h1>
+
+       
+
+        <mat-toolbar>
+            <span>User List</span>
+        </mat-toolbar>
+        <app-userlist></app-userlist>
+        
+       
+     <!--   <app-message-detail></app-message-detail>  -->
+      
+
+    
+  
+
+       
+
+       
+
+    
+      </main>
+    </div>
+  </div>  

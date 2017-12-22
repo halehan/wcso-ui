@@ -3,18 +3,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule } from '@angular/http';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSelectModule} from '@angular/material/select';
 
 import { AuthGuard } from './guards/index';
 import { UserService } from './services/user.service';
@@ -35,7 +23,44 @@ import { FooterComponent } from './footer/footer.component';
 import { MessageListComponent } from './message-list/message-list.component';
 import { MessageDetailComponent } from './message-detail/message-detail.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { MessageComponent } from './message/message.component';
+import { UserComponent } from './user/user.component';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule,
+} from '@angular/material';
+import { UserlistComponent } from './user/userlist/userlist.component';
+import { AtableListComponent } from './atable-list/atable-list.component';
 
 
 @NgModule({
@@ -50,7 +75,11 @@ import { ProfileComponent } from './profile/profile.component';
     FooterComponent,
     MessageListComponent,
     MessageDetailComponent,
-    ProfileComponent
+    ProfileComponent,
+    MessageComponent,
+    UserComponent,
+    UserlistComponent,
+    AtableListComponent
 
   ],
   imports: [
@@ -72,6 +101,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatGridListModule,
+    MatFormFieldModule,
     MatSelectModule,
   ],
   providers: [

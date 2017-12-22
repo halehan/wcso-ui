@@ -7,7 +7,7 @@ export class User {
     role: string;
     phoneMobile: string;
     supervisor: string;
-    createDate: string;
+    createTime: string;
     updateDate: string;
     updateBy: string;
 }
