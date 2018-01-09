@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="main-content">
   <div class="container-fluid">
       <div class="row">
@@ -8,125 +9,109 @@
                       <p class="category">Here is a subtitle for this table</p>
                   </div>
                   <div class="card-content table-responsive">
-                      <table class="table">
-                          <thead class="text-danger">
-                              <tr>
-                                  <th>Name</th>
-                                  <th>Country</th>
-                                  <th>City</th>
-                                  <th>Salary</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td>Dakota Rice</td>
-                                  <td>Niger</td>
-                                  <td>Oud-Turnhout</td>
-                                  <td class="text-danger">$36,738</td>
-                              </tr>
-                              <tr>
-                                  <td>Minerva Hooper</td>
-                                  <td>Curaçao</td>
-                                  <td>Sinaai-Waas</td>
-                                  <td class="text-danger">$23,789</td>
-                              </tr>
-                              <tr>
-                                  <td>Sage Rodriguez</td>
-                                  <td>Netherlands</td>
-                                  <td>Baileux</td>
-                                  <td class="text-danger">$56,142</td>
-                              </tr>
-                              <tr>
-                                  <td>Philip Chaney</td>
-                                  <td>Korea, South</td>
-                                  <td>Overland Park</td>
-                                  <td class="text-danger">$38,735</td>
-                              </tr>
-                              <tr>
-                                  <td>Doris Greene</td>
-                                  <td>Malawi</td>
-                                  <td>Feldkirchen in Kärnten</td>
-                                  <td class="text-danger">$63,542</td>
-                              </tr>
-                              <tr>
-                                  <td>Mason Porter</td>
-                                  <td>Chile</td>
-                                  <td>Gloucester</td>
-                                  <td class="text-danger">$78,615</td>
-                              </tr>
-                          </tbody>
-                      </table>
-
-                  </div>
-              </div>
-          </div>
-
-          <div class="col-md-12">
-              <div class="card card-plain">
-                  <div class="card-header" data-background-color="red">
-                      <h4 class="title">Table on Plain Background</h4>
-                      <p class="category">Here is a subtitle for this table</p>
-                  </div>
-                  <div class="card-content table-responsive">
                       <table class="table table-hover">
                           <thead>
                               <tr>
-                                  <th>ID</th>
-                                  <th>Name</th>
-                                  <th>Salary</th>
-                                  <th>Race</th>
-                                  <th>City</th>
+                                  <th>Login ID</th>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th>Phone</th>
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td>1</td>
-                                  <td>Dakota Rice</td>
-                                  <td>$36,738</td>
-                                  <td>Niger</td>
-                                  <td>Oud-Turnhout</td>
-                              </tr>
-                              <tr>
-                                  <td>2</td>
-                                  <td>Minerva Hooper</td>
-                                  <td>$23,789</td>
-                                  <td>Curaçao</td>
-                                  <td>Sinaai-Waas</td>
-                              </tr>
-                              <tr>
-                                  <td>3</td>
-                                  <td>Sage Rodriguez</td>
-                                  <td>$56,142</td>
-                                  <td>Netherlands</td>
-                                  <td>Baileux</td>
-                              </tr>
-                              <tr>
-                                  <td>4</td>
-                                  <td>Philip Chaney</td>
-                                  <td>$38,735</td>
-                                  <td>Korea, South</td>
-                                  <td>Overland Park</td>
-                              </tr>
-                              <tr>
-                                  <td>5</td>
-                                  <td>Doris Greene</td>
-                                  <td>$63,542</td>
-                                  <td>Malawi</td>
-                                  <td>Feldkirchen in Kärnten</td>
-                              </tr>
-                              <tr>
-                                  <td>6</td>
-                                  <td>Mason Porter</td>
-                                  <td>$78,615</td>
-                                  <td>Chile</td>
-                                  <td>Gloucester</td>
-                              </tr>
+                            <tr *ngFor="let user of users">
+                                <td>{{user.loginId}}</td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td>{{user.phoneMobile}}</td>
+                                <td>
+                                    <button (click)="onSelect(user)" class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="Edit User" type="button">
+                                        <i  class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                    <button (click)="onSelectDelete(user)" class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="Delete User" type="button">
+                                        <i  class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
                           </tbody>
                       </table>
                   </div>
               </div>
           </div>
       </div>
-  </div>
+   </div>
 </div>
+<br>
+
+<div  *ngIf="selectedUser" class="col-md-6">
+     <!--   <form #myForm="ngForm" (ngSubmit)="register(myForm)" novalidate>
+                <div>
+                    <label>First Name</label>
+                    <input type="text" name="firstName=" #firstName="ngModel" ngModel required>
+                </div>
+                <div>
+                          
+                            
+                        <label>Last Name</label>
+                        <input type="text" name="lastName=" #lastName="ngModel" ngModel required>
+                         
+                          </div>
+                          <div>
+                              
+                                
+                            <label>Phone</label>
+                            <input type="text" name="phoneMobile=" #phoneMobile="ngModel" ngModel required>
+                             
+                              </div>
+
+                      <pre>{{myForm.value | json}}</pre>
+                      <button type="submit" [disabled]="myForm.invalid || myForm.pending">Register</button>
+                      <button type="button" (click)="printMyForm()">Print to console</button>
+            </form>  -->
+        
+        <form> 
+                  <div class="form-group">
+                        <label for="loginId">Login Id: </label>
+                        <input disabled class="form-control" type="text" name="loginId" required [(ngModel)]="selectedUser.loginId" #loginId="ngModel" placeholder="John.Doe@gmail.com">
+                            <div [hidden]="loginId.valid || loginId.pristine" class="error">
+                                Login Id is required.
+                            </div>  
+                    </div> 
+                    <div class="form-group">
+                        <label for="firstNnameInput">First Name</label>
+                        <input class="form-control" type="text" name="firstName" required [(ngModel)]="selectedUser.firstName" #firstName="ngModel" placeholder="Joel">
+                            <div [hidden]="firstName.valid || firstName.pristine" class="error">
+                                First Name is required.
+                            </div>  
+                   </div>
+                   <div class="form-group">
+                        <label for="lastNnameInput">Last Name</label>
+                        <input class="form-control" type="text" name="lastName" required [(ngModel)]="selectedUser.lastName" #lastName="ngModel" placeholder="Jones">
+                            <div [hidden]="lastName.valid || lastName.pristine" class="error">
+                                Last Name is required.
+                            </div>  
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phoneMobileInput">Phone Number</label>
+                        <input class="form-control" type="text" name="phoneMobile" required [(ngModel)]="selectedUser.phoneMobile" #phoneMobile="ngModel" placeholder="(###) ###-####">
+                            <div [hidden]="phoneMobile.valid || phoneMobile.pristine" class="error">
+                                Phone Number is required.
+                            </div>  
+                    </div>
+
+  <!--                  <div class="form-group">
+                                <label for="exampleFormControlInput1">Phone Number</label>
+                               <input [(ngModel)]="selectedUser.lastName" name="lastName" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                                <label for="exampleFormControlInput1">Phone Number</label>
+                               <input [(ngModel)]="selectedUser.phoneMobile" name="phoneMobile" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>  -->
+                    <button (click)="updateUser()" type="submit" class="btn btn-primary">Save</button> 
+            </form>  
+        
+
+  
+</div> 
 

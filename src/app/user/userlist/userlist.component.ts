@@ -13,7 +13,7 @@ import { User } from '../../model/index';
 })
 export class UserlistComponent implements OnInit,  AfterViewInit {
 
-  displayedColumns = ['firstName', 'lastName', 'loginId', 'createdTime', 'delete'];
+  displayedColumns = ['firstName', 'lastName', 'loginId', 'createdTime'];
   userDataSource = new MatTableDataSource();
   users: User[] = [];
 
@@ -34,9 +34,9 @@ export class UserlistComponent implements OnInit,  AfterViewInit {
   ngOnInit() {
 
     this.userService.getAll()
-    .subscribe(users => {
-        this.users = users;
-        this.userDataSource.data = users;
+    .subscribe(dogFace => {
+        this.users = dogFace;
+        this.userDataSource.data = dogFace;
 
     });
 
@@ -46,6 +46,16 @@ export class UserlistComponent implements OnInit,  AfterViewInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.userDataSource.filter = filterValue;
+  }
+
+  updateUser() {
+
+ //   let userOperation: Observable<User[]>;
+
+   // userOperation = this.commentService.updateComment(this.model)
+  //  userOperation = 
+    this.userService.update(this.selectedUser);
+
   }
 
 }

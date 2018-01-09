@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+
 
 import { AuthenticationService } from './authentication.service';
 import { User } from '../model/index';
 
-const url = 'http://localhost:3000/api/user';
+const url = 'http://localhost:3000/api/user/';
 
 @Injectable()
 export class UserService {
@@ -19,13 +20,32 @@ export class UserService {
         return this.http.post(url, user, this.jwt()).map((response: Response) => response.json());
     }
 
+    getByLogin(loginId: string): Observable<any> {
+        return this.http.get(url + loginId, this.jwt()).map((response: Response) => response.json());
+    }
+
     getById(id: number) {
         return this.http.get(url + id, this.jwt()).map((response: Response) => response.json());
     }
 
- /*   update(user: User) {
-        return this.http.put('/api/users/' + user.id, user, this.jwt()).map((response: Response) => response.json());
-    } */
+    update(user: User) {
+        const fug = url + user.loginId;
+     //   const once = this.http.put(fug, JSON.stringify(user), this.jwt())
+     //   .map(() => user);
+
+   //   const dog =  this.http.put(fug, user, this.jwt()).map((response: Response) => response.json());
+    //   return dog;
+       return this.http.put(fug, user, this.jwt()).map((response: Response) => response.json());
+    }
+
+    private handleError (error: any) {
+        // In a real world app, we might use a remote logging infrastructure
+        // We'd also dig deeper into the error to get a better message
+        const errMsg = (error.message) ? error.message :
+          error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable.throw(errMsg);
+      }
 
     delete(id: number) {
         return this.http.delete(url + id, this.jwt()).map((response: Response) => response.json());

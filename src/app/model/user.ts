@@ -5,9 +5,14 @@ export class User {
     loginId: string;
     password: string;
     role: string;
+    address: string;
+    about: string;
+    city: string;
+    zip: string;
     phoneMobile: string;
     supervisor: string;
     createTime: string;
     updateDate: string;
     updateBy: string;
+
 }
