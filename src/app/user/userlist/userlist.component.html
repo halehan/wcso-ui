@@ -28,7 +28,7 @@
             <mat-cell *matCellDef="let element">{{ element.createdTime | date }}</mat-cell>
           </ng-container>  
           
-          <ng-container matColumnDef="createdTime">
+          <ng-container matColumnDef="edit">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
             <button (click)="onSelect(user)" class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="Edit User" type="button">
                   <i  class="fa fa-pencil" aria-hidden="true"></i>

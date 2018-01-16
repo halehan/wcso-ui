@@ -28,6 +28,7 @@ import { MessageComponent } from './message/message.component';
 import { UserComponent } from './user/user.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SimpleTimer } from 'ng2-simple-timer';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,

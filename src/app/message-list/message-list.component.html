@@ -40,6 +40,7 @@
             <button   *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
                   <i class="fa fa-check mat-icon"></i>  
                 </button>  
+                
             
           </mat-cell>
         </ng-container>
@@ -83,6 +84,11 @@
              </div>
              <div class="col-md-4">
                 <button (click)="sendMessage()" type="button" class="btn btn-success"> Send </button>  
+
+            <!--    <ng-template #popContent>Hello, <b>{{name}}</b>!</ng-template>
+                <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContent" popoverTitle="Fancy content">
+                  I've got markup and bindings in my popover!
+                </button>  -->
 
              </div>
 

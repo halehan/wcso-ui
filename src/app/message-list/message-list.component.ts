@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import { SimpleTimer } from 'ng2-simple-timer';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-message-list',
@@ -22,6 +23,7 @@ export class MessageListComponent implements OnInit,  AfterViewInit {
   messages: Message[] = [];
   observableMessages: Observable<Message[]>;
   timerId: string;
+  name = 'World';
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -64,8 +66,8 @@ export class MessageListComponent implements OnInit,  AfterViewInit {
      // get messages from secure api end point
   //   this.subscription = this.messageService.getAll().subscribe(message => { this.messages = message; });
   this.findAll();
-  this.st.newTimer('10sec', 10);
-  this.timerId = this.st.subscribe('10sec', () => this.findAll());
+  this.st.newTimer('30sec', 30);
+  this.timerId = this.st.subscribe('30sec', () => this.findAll());
 
   }
 
@@ -77,7 +79,7 @@ export class MessageListComponent implements OnInit,  AfterViewInit {
 
   closeThread(message: Message) {
 
-    this.messageService.closeThread(message.threadId).subscribe(
+    this.messageService.closeThread(message).subscribe(
       data => {
         this.toastr.success('Thread Closed Successfully', '', {
           timeOut: 2000,

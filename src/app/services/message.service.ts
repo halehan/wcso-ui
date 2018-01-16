@@ -16,8 +16,8 @@ export class MessageService {
     private authenticationService: AuthenticationService) {
 }
 
-closeThread(id: number) {
-  return this.http.put(url + '/closethread/' + id, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
+closeThread(message: Message) {
+  return this.http.post(url + '/closethread', message, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
 }
 
 sendMessage(message: Message) {
@@ -33,7 +33,7 @@ getById(id: number) {
 }
 
 private handleError (error: Response | any) {
-  console.error('messageService::handleError', error);
+  console.error('messageService::handleError' + error);
   return Observable.throw(error);
 }
 
@@ -43,7 +43,8 @@ private handleError (error: Response | any) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (currentUser && currentUser.token) {
     //    const headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-        const headers = new Headers({ 'Authorization': currentUser.token });
+        const headers = new Headers({ 'Authorization': currentUser.token,  'x-access-token': currentUser.token } );
+        console.log(headers);
         return new RequestOptions({ headers: headers });
     }
 }
