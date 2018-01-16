@@ -16,16 +16,25 @@ export class MessageService {
     private authenticationService: AuthenticationService) {
 }
 
+closeThread(id: number) {
+  return this.http.put(url + '/closethread/' + id, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
+}
+
 sendMessage(message: Message) {
-  return this.http.post(url + '/sendmessage', message, this.jwt()).map((response: Response) => response.json());
+  return this.http.post(url + '/sendmessage', message, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
 }
 
 getAll(): Observable<Message[]> {
-  return this.http.get(url, this.jwt()).map((response: Response) => response.json());
+  return this.http.get(url, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
 }
 
 getById(id: number) {
-  return this.http.get(url + id, this.jwt()).map((response: Response) => response.json());
+  return this.http.get(url + id, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
+}
+
+private handleError (error: Response | any) {
+  console.error('messageService::handleError', error);
+  return Observable.throw(error);
 }
 
 

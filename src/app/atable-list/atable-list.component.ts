@@ -5,6 +5,7 @@ import { Component, OnInit, ViewChild  } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { UserService } from '../services/user.service';
 import { User } from '../model/index';
+import { ToastrService } from 'ngx-toastr';
 
 export class Employee {
   id: number;
@@ -49,7 +50,7 @@ export class AtableListComponent implements OnInit {
     this.selectedUser = user;
   }
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.userService.getAll()
@@ -69,6 +70,10 @@ export class AtableListComponent implements OnInit {
           this.selectedUser = suck;
          // this.userDataSource.data = users;
 
+      });
+
+      this.toastr.success('User Update Successful', 'User Update', {
+        timeOut: 2000,
       });
 
       }

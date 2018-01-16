@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,8 @@ import { MessageDetailComponent } from './message-detail/message-detail.componen
 import { ProfileComponent } from './profile/profile.component';
 import { MessageComponent } from './message/message.component';
 import { UserComponent } from './user/user.component';
+import { ToastrModule } from 'ngx-toastr';
+import { SimpleTimer } from 'ng2-simple-timer';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -84,7 +87,13 @@ import { AtableListComponent } from './atable-list/atable-list.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 20000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
@@ -110,7 +119,8 @@ import { AtableListComponent } from './atable-list/atable-list.component';
     UserService,
     MessageService,
     AlertService,
-    NavbarService
+    NavbarService,
+    SimpleTimer,
   ],
   bootstrap: [AppComponent]
 })

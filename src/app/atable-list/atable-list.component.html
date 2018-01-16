@@ -1,12 +1,12 @@
 <app-navbar></app-navbar>
-<div class="main-content">
+<div class="padtop">
   <div class="container-fluid">
       <div class="row">
           <div class="col-md-12">
               <div class="card">
                   <div class="card-header" data-background-color="red">
-                      <h4 class="title">Simple Table</h4>
-                      <p class="category">Here is a subtitle for this table</p>
+                      <h4 class="title">Users</h4>
+                      <p class="category">List of application users</p>
                   </div>
                   <div class="card-content table-responsive">
                       <table class="table table-hover">
@@ -42,76 +42,80 @@
    </div>
 </div>
 <br>
+<div class="container" *ngIf="selectedUser">
+      
 
-<div  *ngIf="selectedUser" class="col-md-6">
-     <!--   <form #myForm="ngForm" (ngSubmit)="register(myForm)" novalidate>
-                <div>
-                    <label>First Name</label>
-                    <input type="text" name="firstName=" #firstName="ngModel" ngModel required>
-                </div>
-                <div>
-                          
-                            
-                        <label>Last Name</label>
-                        <input type="text" name="lastName=" #lastName="ngModel" ngModel required>
-                         
-                          </div>
-                          <div>
-                              
-                                
-                            <label>Phone</label>
-                            <input type="text" name="phoneMobile=" #phoneMobile="ngModel" ngModel required>
-                             
-                              </div>
 
-                      <pre>{{myForm.value | json}}</pre>
-                      <button type="submit" [disabled]="myForm.invalid || myForm.pending">Register</button>
-                      <button type="button" (click)="printMyForm()">Print to console</button>
-            </form>  -->
-        
+
         <form> 
-                  <div class="form-group">
-                        <label for="loginId">Login Id: </label>
-                        <input disabled class="form-control" type="text" name="loginId" required [(ngModel)]="selectedUser.loginId" #loginId="ngModel" placeholder="John.Doe@gmail.com">
-                            <div [hidden]="loginId.valid || loginId.pristine" class="error">
-                                Login Id is required.
-                            </div>  
-                    </div> 
-                    <div class="form-group">
-                        <label for="firstNnameInput">First Name</label>
-                        <input class="form-control" type="text" name="firstName" required [(ngModel)]="selectedUser.firstName" #firstName="ngModel" placeholder="Joel">
-                            <div [hidden]="firstName.valid || firstName.pristine" class="error">
-                                First Name is required.
-                            </div>  
-                   </div>
-                   <div class="form-group">
-                        <label for="lastNnameInput">Last Name</label>
-                        <input class="form-control" type="text" name="lastName" required [(ngModel)]="selectedUser.lastName" #lastName="ngModel" placeholder="Jones">
-                            <div [hidden]="lastName.valid || lastName.pristine" class="error">
-                                Last Name is required.
-                            </div>  
+                <div class="row">
+                        <div class="col-md-4 form-group">
+                                <label for="firstNnameInput">First Name</label>
+                                <input class="form-control" type="text" name="firstName" required [(ngModel)]="selectedUser.firstName" #firstName="ngModel" placeholder="Joel">
+                                    <div [hidden]="firstName.valid || firstName.pristine" class="error">
+                                        First Name is required.
+                                    </div>  
+                        </div>
+              
+              
+                    <div class="col-md-4 form-group">
+                            <label for="lastNnameInput">Last Name</label>
+                            <input class="form-control" type="text" name="lastName" required [(ngModel)]="selectedUser.lastName" #lastName="ngModel" placeholder="Jones">
+                                <div [hidden]="lastName.valid || lastName.pristine" class="error">
+                                    Last Name is required.
+                                </div>  
+                           
                     </div>
+                    <div class="col-md-4 form-group">
+                            <label for="phoneMobileInput">Phone</label>
+                            <input class="form-control" type="text" name="phoneMobile" required [(ngModel)]="selectedUser.phoneMobile" #phoneMobile="ngModel" placeholder="(###) ###-####">
+                                <div [hidden]="phoneMobile.valid || phoneMobile.pristine" class="error">
+                                    Phone Number is required.
+                                </div>  
+    
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-12 form-group">
+                                <label for="addressInput">Address</label>
+                                <input class="form-control" type="text" name="address" required [(ngModel)]="selectedUser.address" #address="ngModel" placeholder="Address">
+                                    <div [hidden]="address.valid || address.pristine" class="error">
+                                       Address is required.
+                                    </div>  
 
-                    <div class="form-group">
-                        <label for="phoneMobileInput">Phone Number</label>
-                        <input class="form-control" type="text" name="phoneMobile" required [(ngModel)]="selectedUser.phoneMobile" #phoneMobile="ngModel" placeholder="(###) ###-####">
-                            <div [hidden]="phoneMobile.valid || phoneMobile.pristine" class="error">
-                                Phone Number is required.
-                            </div>  
-                    </div>
 
-  <!--                  <div class="form-group">
-                                <label for="exampleFormControlInput1">Phone Number</label>
-                               <input [(ngModel)]="selectedUser.lastName" name="lastName" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                    </div>
-                    <div class="form-group">
-                                <label for="exampleFormControlInput1">Phone Number</label>
-                               <input [(ngModel)]="selectedUser.phoneMobile" name="phoneMobile" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                    </div>  -->
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-4 form-group">
+                                <label for="CityInput">City</label>
+                                <input class="form-control" type="text" name="city" required [(ngModel)]="selectedUser.city" #city="ngModel" placeholder="City">
+                                    <div [hidden]="city.valid || city.pristine" class="error">
+                                        City is required.
+                                    </div>  
+
+                        </div>
+                        <div class="col-md-4 form-group">
+                                <label for="CityInput">State</label>
+                                <input class="form-control" type="text" name="state" required [(ngModel)]="selectedUser.state" #state="ngModel" placeholder="State">
+                                    <div [hidden]="state.valid || state.pristine" class="error">
+                                        State is required.
+                                    </div>  
+
+                        </div>
+                        <div class="col-md-4 form-group">
+                                <label for="zipInput">Zip</label>
+                                <input class="form-control" type="text" name="zip" required [(ngModel)]="selectedUser.zip" #zip="ngModel" placeholder="zip">
+                                    <div [hidden]="zip.valid || zip.pristine" class="error">
+                                        Zip is required.
+                                    </div>  
+
+                        </div>
+                </div>
+                <div class="row">
+               
+                </div>
                     <button (click)="updateUser()" type="submit" class="btn btn-primary">Save</button> 
-            </form>  
-        
-
-  
-</div> 
-
+            </form> 
+        </div>
+        <br>

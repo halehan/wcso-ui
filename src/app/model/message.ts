@@ -4,7 +4,7 @@ export class Message {
     createdTime: string;
     threadStatus: string;
     message: string;
-    threadId: string;
+    threadId: number;
     messageId: string;
 
 }
