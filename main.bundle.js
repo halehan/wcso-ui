@@ -1749,8 +1749,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AuthenticationService = (function () {
     function AuthenticationService(http) {
         this.http = http;
-        this.localUrl = 'http://localhost:3000/';
-        this.gitUrl = 'https://halehan.github.io/wcso-api-ts:3000/';
+        //  public url = 'http://localhost:3000/';
+        this.url = 'https://wcso-api-ts.herokuapp.com/';
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
@@ -1761,7 +1761,7 @@ var AuthenticationService = (function () {
         headers.append('Content-Type', 'application/json; charset=UTF-8');
         headers.append('Cache-Control', 'no-cache');
         var body = JSON.stringify({ loginId: username, password: password });
-        return this.http.post(this.gitUrl + 'authenticate', body, { headers: headers })
+        return this.http.post(this.url + 'authenticate', body, { headers: headers })
             .map(function (response) {
             // login successful if there's a jwt token in the response
             var token = response.json() && response.json().token;
@@ -1822,7 +1822,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // const url = 'http://localhost:3000/messages';
-var url = 'https://halehan.github.io/wcso-api-ts:3000/messages';
+var url = 'https://wcso-api-ts.herokuapp.com/messages';
 var MessageService = (function () {
     function MessageService(http, authenticationService) {
         this.http = http;
@@ -1891,7 +1891,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 // const url = 'http://localhost:3000/api/user/';
-var url = 'https://halehan.github.io/wcso-api-ts:3000/api/user/';
+var url = 'https://wcso-api-ts.herokuapp.com/api/user/';
 var UserService = (function () {
     function UserService(http, authenticationService) {
         this.http = http;
