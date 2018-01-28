@@ -1,5 +1,5 @@
 import { Component, NgZone, ViewChild, OnInit,  OnDestroy, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';
-import {MatTableDataSource , MatSort, MatMenu} from '@angular/material';
+import {MatTableDataSource , MatSort, MatMenu, MatCard} from '@angular/material';
 import { Message } from '../model/index';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
@@ -19,7 +19,7 @@ import { AgmCoreModule } from '@agm/core';
 
 export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy {
   public editRow: boolean;
-
+  public showAttachment: boolean;
   displayedColumns = ['message', 'threadId', 'created', 'address', 'actionsColumn'];
   messageDataSource = new MatTableDataSource();
   subscription: Subscription;
@@ -50,7 +50,11 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
     this.messageDataSource.sort = this.sort;
   }
 
+  showAttachmentComponent(message: Message): void {
+    this.selectedMessage = message;
+    this.showAttachment = true;
 
+  }
 
   onSelect(message: Message): void {
     this.selectedMessage = message;

@@ -9,5 +9,6 @@ export class Message {
     lat: number;
     long: number;
     address: string;
+    attachmentUrl: string;
 
 }

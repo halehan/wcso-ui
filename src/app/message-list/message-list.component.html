@@ -30,20 +30,19 @@
         </ng-container>
 
       <ng-container matColumnDef="actionsColumn">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Reply &nbsp; &nbsp; Close Thread</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Reply &nbsp; &nbsp; Close Thread &nbsp; Attachment</mat-header-cell>
          
           <mat-cell *matCellDef="let row">
             <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="onSelect(row)">
                   <i class="fa fa-pencil mat-icon"></i>
-                </button>
-                <button  *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="closeThread(row)">
+            </button>
+            <button  style="padding-left: 30px;" *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="closeThread(row)">
                     <i class="fa fa-times mat-icon"></i>
-                  </button> 
-            <button   *ngIf="row.editing" mat-icon-button color="primary" focusable="false" (click)="row.confirmEditCreate()">
-                  <i class="fa fa-check mat-icon"></i>  
-                </button>  
-                
-            </mat-cell>
+            </button> 
+            <button style="padding-left: 60px;"  *ngIf="row.attachmentUrl" mat-icon-button color="primary" focusable="false" (click)="showAttachmentComponent(row)">
+                <i  class="fa fa-file-image-o"></i>
+            </button>
+          </mat-cell>
         </ng-container>
   
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -52,25 +51,27 @@
     </mat-table>
     <br>
     <br>
-        <div class="row">
-          <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title">Confirm Close Thread</h4>
-              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>To close thread click Ok</p>
-            </div>
-            <div class="modal-footer">
-              
-              <button type="button" class="btn btn-outline-light" (click)="open(content, row)" >Ok</button>
-              <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Cancel</button>
-            </div>
-          </ng-template>
-        </div>
-      
+   
+      <mat-card *ngIf="showAttachment" class="card">
+          <mat-card-header>
+            <mat-card-title>Attachment Regarding Thread {{selectedMessage.threadId}}</mat-card-title>
+            <mat-card-subtitle>Uploaded {{selectedMessage.createdTime | dateFormat}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src={{selectedMessage.attachmentUrl}} alt="Photo">
+     <!--        <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+              bred for hunting.
+            </p>
+          </mat-card-content>
+       <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>  -->
+        </mat-card>
+<hr *ngIf="editRow">
+
   <div *ngIf="editRow" class="jumbotron">
     <h1 class="display-4">Reply</h1>
       <br>

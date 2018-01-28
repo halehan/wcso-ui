@@ -107,6 +107,7 @@ import { DateFormatPipe } from './date-format.pipe';
     routing,
     MatButtonModule,
     MatCheckboxModule,
+    MatCardModule,
     MatToolbarModule,
     MatListModule,
     MatIconModule,
