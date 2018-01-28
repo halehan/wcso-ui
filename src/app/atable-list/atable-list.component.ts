@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import { UserService } from '../services/user.service';
 import { User } from '../model/index';
 import { ToastrService } from 'ngx-toastr';
+import { NavbarService } from '../navbar/navbar.service';
 
 export class Employee {
   id: number;
@@ -21,6 +22,7 @@ export class Employee {
   styleUrls: ['./atable-list.component.scss']
 })
 export class AtableListComponent implements OnInit {
+
 
   @ViewChild('myForm')
   private myForm: NgForm;
@@ -50,9 +52,14 @@ export class AtableListComponent implements OnInit {
     this.selectedUser = user;
   }
 
-  constructor(private userService: UserService, private toastr: ToastrService) { }
+  constructor(public nav: NavbarService, private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.nav.dashActive = '';
+    this.nav.homeActive = '';
+    this.nav.profileActive = '';
+    this.nav.listActive = 'active';
+    this.nav.show();
     this.userService.getAll()
     .subscribe(users => {
         this.users = users;

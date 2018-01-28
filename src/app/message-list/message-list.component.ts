@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, NgZone, ViewChild, OnInit,  OnDestroy, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';
 import {MatTableDataSource , MatSort, MatMenu} from '@angular/material';
 import { Message } from '../model/index';
 import { UserService } from '../services/user.service';
@@ -7,15 +7,20 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import { SimpleTimer } from 'ng2-simple-timer';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from '@agm/core';
 
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./message-list.component.scss']
 })
-export class MessageListComponent implements OnInit,  AfterViewInit {
-  displayedColumns = ['message', 'threadId', 'created', 'actionsColumn'];
+
+export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy {
+  public editRow: boolean;
+
+  displayedColumns = ['message', 'threadId', 'created', 'address', 'actionsColumn'];
   messageDataSource = new MatTableDataSource();
   subscription: Subscription;
   selectedMessage: Message;
@@ -23,31 +28,40 @@ export class MessageListComponent implements OnInit,  AfterViewInit {
   messages: Message[] = [];
   observableMessages: Observable<Message[]>;
   timerId: string;
-  name = 'World';
+  @Input() name;
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private messageService: MessageService, private toastr: ToastrService, private st: SimpleTimer) {
-
+  constructor(private messageService: MessageService, private toastr: ToastrService, private st: SimpleTimer,
+    private modalService: NgbModal, private ngZone: NgZone) {
    }
+
+   ngOnDestroy() {
+    this.st.unsubscribe(this.timerId);
+    console.log('calling ngOnDestroy');
+  }
+
+   open(content, message: Message) {
+     this.selectedMessage = message;
+    this.modalService.open(content, { windowClass: 'dark-modal' });
+  }
 
    ngAfterViewInit() {
     this.messageDataSource.sort = this.sort;
   }
 
+
+
   onSelect(message: Message): void {
     this.selectedMessage = message;
     this.newMessage = new Message();
-    // this.newMessage = this.selectedMessage;
     this.newMessage.threadId = this.selectedMessage.threadId;
     this.newMessage.messageId = this.selectedMessage.messageId;
     this.newMessage.threadStatus = 'open';
     this.newMessage.message = '';
+    this.editRow = true;
 
     console.log(this.selectedMessage.message);
-    // this.myForm.controls['firstName'].setValue('DEF');
-    // this.myForm.form.controls['firstName'].setValue('ABC');
-    // this.myForm.form.controls['firstName'].setValue(user.firstName);
 
 
   }
@@ -64,10 +78,10 @@ export class MessageListComponent implements OnInit,  AfterViewInit {
 
   ngOnInit() {
      // get messages from secure api end point
-  //   this.subscription = this.messageService.getAll().subscribe(message => { this.messages = message; });
+  // this.subscription = this.messageService.getAll().subscribe(message => { this.messages = message; });
   this.findAll();
-  this.st.newTimer('30sec', 30);
-  this.timerId = this.st.subscribe('30sec', () => this.findAll());
+  this.st.newTimer('timeout', 20);
+  this.timerId = this.st.subscribe('timeout', () => this.findAll());
 
   }
 
@@ -91,12 +105,15 @@ export class MessageListComponent implements OnInit,  AfterViewInit {
         });
       });
 
+      this.editRow = false;
+      this.findAll();
+
   }
 
   sendMessage() {
 
     this.toastr.info('Sending Message', '', {
-      timeOut: 2300,
+      timeOut: 2000,
     });
 
     this.messageService.sendMessage(this.newMessage).subscribe(
@@ -108,9 +125,11 @@ export class MessageListComponent implements OnInit,  AfterViewInit {
       },
       error => {
         this.toastr.success('Message Error' + error, 'Message Error', {
-          timeOut: 2000,
+          timeOut: 3000,
         });
       });
+
+      this.editRow = false;
 
   }
 

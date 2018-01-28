@@ -12,4 +12,22 @@
 .mat-header-cell.mat-sort-header-sorted {
   color: black;
 }
+
+.dark-modal .modal-content {
+  background-color: #292b2c;
+  color: white;
+}
+.dark-modal .close {
+  color: white;   
+}
   
+
+.mat-cell,
+.mat-header-cell {
+  flex: 0 0 30%;
+}
+
+.mat-column-Actions {
+  flex: 0 0 100px !important;
+  white-space: unset !important;
+}

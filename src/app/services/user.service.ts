@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
 import { AuthenticationService } from './authentication.service';
 import { User } from '../model/index';
 
-const url = 'http://localhost:3000/api/user/';
+// const url = 'http://localhost:3000/api/user/';
+const url = 'https://wcso-api-ts.herokuapp.com/api/user/';
 
 @Injectable()
 export class UserService {

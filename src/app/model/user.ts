@@ -8,6 +8,7 @@ export class User {
     address: string;
     about: string;
     city: string;
+    state: string;
     zip: string;
     phoneMobile: string;
     supervisor: string;

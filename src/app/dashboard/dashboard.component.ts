@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
      this.nav.dashActive = 'active';
      this.nav.homeActive = '';
      this.nav.profileActive = '';
+     this.nav.listActive = '';
      this.count = this.nav.getCount();
      this.messageService.getAll()
      .subscribe(messages => {

@@ -1,5 +1,5 @@
-
-<div>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAGZ6xu-PUDubQLdxQvBl5DeJgXscWEbPo"></script>
+<div >
     <div class="example-header">
       <mat-form-field>
         <input matInput (keyup)="applyMessageFilter($event.target.value)" placeholder="Filter">
@@ -10,26 +10,28 @@
   
       <ng-container matColumnDef="message">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.message}} </mat-cell>
+        <mat-cell xFlex="100px" *matCellDef="let row"> {{row.message}} </mat-cell>
       </ng-container>
   
       <ng-container matColumnDef="threadId">
         <mat-header-cell *matHeaderCellDef mat-sort-header> ThreadId </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.threadId}} </mat-cell>
       </ng-container>  
-  
+
       <ng-container matColumnDef="created">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.createdTime | date }}</mat-cell>
-      </ng-container>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
+     <!--     <mat-cell *matCellDef="let row"> {{row.createdTime | date: 'medium'}} </mat-cell>  -->
+          <mat-cell fxFlex="60px" *matCellDef="let row"> {{row.createdTime | dateFormat}} </mat-cell>
+       </ng-container>
+
+      <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.address}}</mat-cell>
+        </ng-container>
 
       <ng-container matColumnDef="actionsColumn">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Reply / Close Thread</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Reply &nbsp; &nbsp; Close Thread</mat-header-cell>
          
-      <!--    <mat-header-cell *matHeaderCellDef>
-             
-            <button mat-icon-button color="accent" (click)="dataSource.createNew()"><i class="fa fa-plus mat-icon"></i></button>
-          </mat-header-cell>  -->
           <mat-cell *matCellDef="let row">
             <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="onSelect(row)">
                   <i class="fa fa-pencil mat-icon"></i>
@@ -41,74 +43,50 @@
                   <i class="fa fa-check mat-icon"></i>  
                 </button>  
                 
-            
-          </mat-cell>
+            </mat-cell>
         </ng-container>
-
-    <!--    <ng-container matColumnDef="close">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Close Thread </mat-header-cell>
-            <button  *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="row.cancelOrDelete()">
-                <i class="fa fa-times mat-icon"></i>
-              </button>
-          </ng-container>  -->
-    
-
   
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
 
-    
     </mat-table>
     <br>
     <br>
-<hr>
-    <div *ngIf="selectedMessage">
         <div class="row">
-              <div class="col-md-12">
-               <!--   <mat-form-field> -->
-                      <textarea  placeholder="Joel" matTextareaAutosize matAutosizeMinRows="4"
-                      matAutosizeMaxRows="10" matInput placeholder="Message"> {{selectedMessage.message}}</textarea>
-                <!--      <button mat-button>Click me!</button>  
-                      
-                    </mat-form-field>  -->
-               </div>
-           
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Confirm Close Thread</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>To close thread click Ok</p>
+            </div>
+            <div class="modal-footer">
+              
+              <button type="button" class="btn btn-outline-light" (click)="open(content, row)" >Ok</button>
+              <button type="button" class="btn btn-outline-light" (click)="c('Close click')">Cancel</button>
+            </div>
+          </ng-template>
         </div>
-        <hr>
-        <br>
-        <div class="row">
-            <div class="col-md-8">
-                <textarea  name="message" required [(ngModel)]="newMessage.message" #message="ngModel" placeholder="message" matTextareaAutosize matAutosizeMinRows="4"
-                matAutosizeMaxRows="10" matInput> </textarea>
-
-             </div>
-             <div class="col-md-4">
-                <button (click)="sendMessage()" type="button" class="btn btn-success"> Send </button>  
-
-            <!--    <ng-template #popContent>Hello, <b>{{name}}</b>!</ng-template>
-                <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContent" popoverTitle="Fancy content">
-                  I've got markup and bindings in my popover!
-                </button>  -->
-
-             </div>
-
-        </div>
-
-  
-       
-       
-
-       
       
-    <!--    <mat-form-field>
-          <mat-select placeholder="Select">
-            <mat-option value="option">Option</mat-option>
-          </mat-select>
-        </mat-form-field>  -->
-      </div>
-
+  <div *ngIf="editRow" class="jumbotron">
+    <h1 class="display-4">Reply</h1>
       <br>
-      <br>
-  
+        <div class="row">
+          <div class="col-md-12">
+              <textarea  class="form-control lead" name="message" required [(ngModel)]="newMessage.message" #message="ngModel" placeholder="Click to Enter Message" matTextareaAutosize matAutosizeMinRows="4"
+              matAutosizeMaxRows="10" matInput> </textarea>
+            <br>
+          </div>
+        </div>
+      <hr>
+      <p class="lead">{{selectedMessage.message}}</p> 
+        <hr>
+          <p class="lead">
+            <button (click)="sendMessage()" type="button" class="btn btn-success btn-lg "> Send </button> 
+          </p>
+  </div>
 </div>
 

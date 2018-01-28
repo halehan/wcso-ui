@@ -8,12 +8,14 @@ export class NavbarService {
   homeActive = '';
   dashActive = 'active';
   profileActive = '';
+  listActive = '';
 
     constructor() { this.vis = false; this.count = this.count + 1}
 
    getHomeActive() {return this.homeActive}
    getDashActive() {return this.dashActive}
    getProfileActive() {return this.profileActive}
+   getListActive() {return this.listActive}
 
     hide() { this.vis = false; this.count += 1; }
 

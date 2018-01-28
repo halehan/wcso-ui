@@ -6,5 +6,8 @@ export class Message {
     message: string;
     threadId: number;
     messageId: string;
+    lat: number;
+    long: number;
+    address: string;
 
 }

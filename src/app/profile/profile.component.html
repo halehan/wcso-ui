@@ -9,11 +9,11 @@
           <div class="col-md-12">
               <div class="card">
                   <div class="card-header" data-background-color="red">
-                      <h4 class="title">{{_title}}</h4>
+                      <h4 class="title"></h4>
                       <p class="category">Complete your profile</p>
                   </div>
                   <div class="card-content">
-                      <form>
+                      <form #myForm="ngForm">
                           <div class="row">
                        <!--       <div class="col-md-5">
                                   <div class="form-group form-black label-floating is-empty">
@@ -76,8 +76,11 @@
 
                               <div class="col-md-4">
                                 <div class="form-group form-black label-floating is-empty">
-                                    <label class="control-label">State</label>
-                                    <input type="text" name="state" required [(ngModel)]="profile.state" #state="ngModel" class="form-control" >
+                               <!--     <label class="control-label">State</label> 
+                                    <input type="text" name="state" required [(ngModel)]="profile.state" #state="ngModel" class="form-control" > -->
+                                    <label for="typeahead-basic">Search for a state:</label>
+                                <!--    <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="profile.state" [ngbTypeahead]="search"/>  -->
+                                    <input id="typeahead-basic" type="text" class="form-control" name="state" [ngbTypeahead]="search" required [(ngModel)]="profile.state" #state="ngModel"  >
                                 </div>
                             </div>
                              
@@ -101,7 +104,7 @@
                               </div>
                           </div>
   
-                          <button (click)="updateProfile()" type="submit" class="btn btn-success pull-right">Update Profile</button>
+                          <button (click)="updateProfile()" type="submit" [disabled]="!myForm.dirty" class="btn btn-success pull-right">Update Profile</button>
                           <div class="clearfix"></div>
                       </form>
                   </div>

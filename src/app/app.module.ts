@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule } from '@angular/http';
 
 import { AuthGuard } from './guards/index';
@@ -28,6 +28,9 @@ import { MessageComponent } from './message/message.component';
 import { UserComponent } from './user/user.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SimpleTimer } from 'ng2-simple-timer';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule, MapsAPILoader } from '@agm/core';
+
 
 import {
   MatAutocompleteModule,
@@ -65,6 +68,7 @@ import {
 } from '@angular/material';
 import { UserlistComponent } from './user/userlist/userlist.component';
 import { AtableListComponent } from './atable-list/atable-list.component';
+import { DateFormatPipe } from './date-format.pipe';
 
 
 @NgModule({
@@ -83,13 +87,15 @@ import { AtableListComponent } from './atable-list/atable-list.component';
     MessageComponent,
     UserComponent,
     UserlistComponent,
-    AtableListComponent
+    AtableListComponent,
+    DateFormatPipe
 
   ],
   imports: [
     BrowserModule,
     CommonModule,
     BrowserAnimationsModule,
+    NgbModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 20000,
       positionClass: 'toast-bottom-right',
@@ -112,7 +118,7 @@ import { AtableListComponent } from './atable-list/atable-list.component';
     MatProgressSpinnerModule,
     MatGridListModule,
     MatFormFieldModule,
-    MatSelectModule,
+    MatSelectModule
   ],
   providers: [
     AuthGuard,

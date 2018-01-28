@@ -5,8 +5,7 @@ import 'rxjs/add/operator/map';
 
 import { AuthenticationService } from './authentication.service';
 import { Message } from '../model/index';
-
-const url = 'http://localhost:3000/messages';
+import { Constants } from '../util/constants';
 
 @Injectable()
 export class MessageService {
@@ -17,26 +16,29 @@ export class MessageService {
 }
 
 closeThread(message: Message) {
-  return this.http.post(url + '/closethread', message, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
+  return this.http.post(Constants.SERVER_URL + 'messages/closethread', message, this.jwt()).map((response: Response) =>
+    response.json()).catch(this.handleError);
 }
 
 sendMessage(message: Message) {
-  return this.http.post(url + '/sendmessage', message, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
+  return this.http.post(Constants.SERVER_URL + 'messages/sendmessage', message, this.jwt()).map((response: Response) =>
+    response.json()).catch(this.handleError);
 }
 
 getAll(): Observable<Message[]> {
-  return this.http.get(url, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
+  return this.http.get(Constants.SERVER_URL + 'messages', this.jwt()).map((response: Response) =>
+    response.json()).catch(this.handleError);
 }
 
 getById(id: number) {
-  return this.http.get(url + id, this.jwt()).map((response: Response) => response.json()).catch(this.handleError);
+  return this.http.get(Constants.SERVER_URL + 'messages' + id, this.jwt()).map((response: Response) =>
+    response.json()).catch(this.handleError);
 }
 
 private handleError (error: Response | any) {
   console.error('messageService::handleError' + error);
   return Observable.throw(error);
 }
-
 
    private jwt() {
     // create authorization header with jwt token
@@ -48,7 +50,5 @@ private handleError (error: Response | any) {
         return new RequestOptions({ headers: headers });
     }
 }
-
-
 
 }

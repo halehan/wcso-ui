@@ -13,7 +13,7 @@ import { User } from '../../model/index';
 })
 export class UserlistComponent implements OnInit,  AfterViewInit {
 
-  displayedColumns = ['firstName', 'lastName', 'loginId', 'createdTime'];
+  displayedColumns = ['firstName', 'lastName', 'loginId', 'createdTime', 'actionsColumn'];
   userDataSource = new MatTableDataSource();
   users: User[] = [];
 
@@ -49,13 +49,7 @@ export class UserlistComponent implements OnInit,  AfterViewInit {
   }
 
   updateUser() {
-
- //   let userOperation: Observable<User[]>;
-
-   // userOperation = this.commentService.updateComment(this.model)
-  //  userOperation = 
     this.userService.update(this.selectedUser);
-
   }
 
 }
