@@ -110,6 +110,7 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
       });
 
       this.editRow = false;
+      this.showAttachment = false;
       this.findAll();
 
   }
