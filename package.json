@@ -5,6 +5,7 @@
   "main": "index.js",
   "angular-cli": {},
   "scripts": {
+    "postinstall": "ng build --aot -prod",
     "clean": "rm -rf dist",
     "serve": "http-server . -p 5556",
     "build": "npm run clean && tsc",
@@ -19,6 +20,8 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.2",
+    "@angular/cli": "^1.6.0",
+    "@angular/compiler-cli": "^5.2.0",
     "@angular/animations": "^5.2.0",
     "@angular/cdk": "^5.0.0",
     "@angular/common": "^5.2.0",
@@ -49,7 +52,8 @@
     "rxjs": "^5.5.2",
     "toastr": "^2.1.4",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "typescript": "~2.4.2"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.0",
