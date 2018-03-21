@@ -5,6 +5,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import { UserService } from '../../services/user.service';
 import { User } from '../../model/index';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-userlist',
@@ -21,7 +22,7 @@ export class UserlistComponent implements OnInit,  AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private toastr: ToastrService) { }
 
   ngAfterViewInit() {
     this.userDataSource.sort = this.sort;
@@ -48,8 +49,21 @@ export class UserlistComponent implements OnInit,  AfterViewInit {
     this.userDataSource.filter = filterValue;
   }
 
+  /*
   updateUser() {
     this.userService.update(this.selectedUser);
-  }
+  }  */
+
+  updateUser() {
+        this.userService.update(this.selectedUser).subscribe(user => {
+        this.selectedUser = user;
+      });
+
+        this.toastr.success('User Saved Successful', 'User Update', {
+        timeOut: 2000,
+});
+
+      }
+
 
 }

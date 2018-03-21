@@ -1,5 +1,5 @@
 import { Component, NgZone, ViewChild, OnInit,  OnDestroy, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';
-import {MatTableDataSource , MatSort, MatMenu, MatCard} from '@angular/material';
+import {MatPaginator, MatTableDataSource , MatSort, MatMenu, MatCard} from '@angular/material';
 import { Message } from '../model/index';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
@@ -32,6 +32,9 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
 
   @ViewChild(MatSort) sort: MatSort;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
   constructor(private messageService: MessageService, private toastr: ToastrService, private st: SimpleTimer,
     private modalService: NgbModal, private ngZone: NgZone) {
    }
@@ -48,6 +51,7 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
 
    ngAfterViewInit() {
     this.messageDataSource.sort = this.sort;
+    this.messageDataSource.paginator = this.paginator;
   }
 
   showAttachmentComponent(message: Message): void {
