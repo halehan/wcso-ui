@@ -31,9 +31,8 @@ import { SimpleTimer } from 'ng2-simple-timer';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 import { MomentModule } from 'angular2-moment';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserIdleModule } from 'angular-user-idle';
-
 
 
 import {
@@ -75,6 +74,7 @@ import { AtableListComponent } from './atable-list/atable-list.component';
 import { DateFormatPipe } from './date-format.pipe';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,12 +97,13 @@ import { DateFormatPipe } from './date-format.pipe';
   ],
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     CommonModule,
     BrowserAnimationsModule,
     // Optionally you can set time for `idle`, `timeout` and `ping` in seconds.
     // Default values: `idle` is 600 (10 minutes), `timeout` is 300 (5 minutes)
     // and `ping` is 120 (2 minutes).
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 120}),
+    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 12}),
     NgbModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 20000,

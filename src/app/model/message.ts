@@ -10,5 +10,6 @@ export class Message {
     long: number;
     address: string;
     attachmentUrl: string;
+    from: string;
 
 }

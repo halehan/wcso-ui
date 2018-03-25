@@ -49,6 +49,10 @@ export class UserlistComponent implements OnInit,  AfterViewInit {
     this.userDataSource.filter = filterValue;
   }
 
+  closeThread(user: User): void {
+
+  }
+
   /*
   updateUser() {
     this.userService.update(this.selectedUser);

@@ -20,7 +20,7 @@ import { AgmCoreModule } from '@agm/core';
 export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy {
   public editRow: boolean;
   public showAttachment: boolean;
-  displayedColumns = ['message', 'threadId', 'created', 'address', 'actionsColumn'];
+  displayedColumns = ['from', 'message', 'threadId', 'created', 'address', 'reply', 'close', 'attachment'];
   messageDataSource = new MatTableDataSource();
   subscription: Subscription;
   selectedMessage: Message;
@@ -118,6 +118,31 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
       this.findAll();
 
   }
+
+  showFbIcon(): boolean {
+    return this.selectedMessage.from === 'FaceBook';
+  }
+
+  showFbIconRow(message: Message): boolean {
+    console.log(message.from);
+    return message.from === 'FaceBook';
+  }
+
+  showTwitterIconRow(message: Message): boolean {
+    console.log(message.from);
+    return message.from === 'Twitter';
+  }
+ // return (isMember ? "$2.00" : "$10.00");
+
+  getClass(message: Message): string {
+    return message.from === 'FaceBook' ? 'facebook' : 'wcso';
+  }
+
+  showFbIconRowEnabled(message: Message): boolean {
+    // console.log(message.from);
+    return true;
+  }
+
 
   sendMessage() {
 

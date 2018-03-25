@@ -6,34 +6,89 @@
       </mat-form-field>
     </div>
 
+ <!--   <div class="container">
+        <div fxLayout="row" fxLayoutAlign="start center" class="content">
+          <div class="blocks" fxFlex = "25%">1</div>
+          <div class="blocks" fxFlex = "25%">2</div>
+          <div class="blocks" fxFlex = "25%">3</div>
+          <div class="blocks" fxFlex = "25%">4</div>
+          <div class="blocks" fxFlex>3</div>
+        </div>
+      </div>  -->
+
     <mat-table #table [dataSource]="messageDataSource" matSort>
 
+        <ng-container matColumnDef="from">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="50px" > From </mat-header-cell>
+            <mat-cell fxFlex="50px" *matCellDef="let row">
+              <button *ngIf="showFbIconRow(row)" mat-icon-button color="blue" focusable="false" >
+                  <i class="fa fa-facebook-square" aria-hidden="true"></i>
+              </button>
+              <button *ngIf="!showFbIconRow(row) && !showTwitterIconRow(row)" mat-icon-button color="blue" focusable="false" >
+                  <img src="../assets/dcccd-police-black.svg" alt="WCSO">
+              </button>
+              <button *ngIf="showTwitterIconRow(row)" mat-icon-button color="blue" focusable="false" >
+                  <i class="fa fa-twitter-square" aria-hidden="true"></i>
+              </button>
+            </mat-cell>
+        </ng-container>
+
       <ng-container matColumnDef="message">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Message </mat-header-cell>
-        <mat-cell xFlex="100px" *matCellDef="let row"> {{row.message}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="300px"> Message </mat-header-cell>
+          <button  mat-icon-button color="primary" focusable="false" >
+            <i class="fa fa-pencil mat-icon"></i>
+          </button>
+        <mat-cell  fxFlex="300px"  id={{getClass(row)}}   *matCellDef="let row"> {{row.message}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="threadId">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> ThreadId </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.threadId}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="140px"> ThreadId </mat-header-cell>
+        <mat-cell fxFlex="140px" id={{getClass(row)}} *matCellDef="let row"> {{row.threadId}}   </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="created">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="200px"> Created </mat-header-cell>
      <!--     <mat-cell *matCellDef="let row"> {{row.createdTime | date: 'medium'}} </mat-cell>  -->
-          <mat-cell fxFlex="60px" *matCellDef="let row"> {{row.createdTime | dateFormat}} </mat-cell>
+          <mat-cell id={{getClass(row)}} fxFlex="200px" *matCellDef="let row"> {{row.createdTime | dateFormat}} </mat-cell>
        </ng-container>
 
       <ng-container matColumnDef="address">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
-          <mat-cell *matCellDef="let row">{{ row.address}}</mat-cell>
-        </ng-container>
+          <mat-cell  id={{getClass(row)}} *matCellDef="let row">{{ row.address}}</mat-cell>
+      </ng-container>
 
-      <ng-container matColumnDef="actionsColumn">
+      <ng-container matColumnDef="reply">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px"> Reply </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex="60px">
+              <button  mat-icon-button color="primary" focusable="false" disabled="{{!showFbIconRow(row)}}" (click)="onSelect(row)">
+                    <i class="fa fa-pencil mat-icon"></i>
+              </button>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="close">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px"> Close Thread </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex="60px">
+              <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="closeThread(row)">
+                  <i class="fa fa-times mat-icon"></i>
+              </button>
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="attachment">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px"> Attachment </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex="60px">
+              <button   *ngIf="row.attachmentUrl" mat-icon-button color="primary" focusable="false" (click)="showAttachmentComponent(row)">
+                  <i  class="fa fa-file-image-o"></i>
+              </button>
+          </mat-cell>
+      </ng-container>
+
+    <!--  <ng-container matColumnDef="actionsColumn">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Reply &nbsp; &nbsp; Close Thread &nbsp; Attachment</mat-header-cell>
 
           <mat-cell *matCellDef="let row">
-            <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="onSelect(row)">
+            <button  mat-icon-button color="primary" focusable="false" disabled="{{!showFbIconRow(row)}}" (click)="onSelect(row)">
                   <i class="fa fa-pencil mat-icon"></i>
             </button>
             <button  style="padding-left: 30px;" *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="closeThread(row)">
@@ -44,18 +99,17 @@
             </button>
           </mat-cell>
         </ng-container>
+      -->
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-0
-
 
     </mat-table>
 
     <mat-paginator [length]="100"
-[pageSize]="10"
-[pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
     <br>
     <br>
 
@@ -65,20 +119,9 @@
             <mat-card-subtitle>Uploaded {{selectedMessage.createdTime | dateFormat}}</mat-card-subtitle>
           </mat-card-header>
           <img mat-card-image src={{selectedMessage.attachmentUrl}} alt="Photo">
-     <!--        <mat-card-content>
-            <p>
-              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-              bred for hunting.
-            </p>
-          </mat-card-content>
-       <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>  -->
         </mat-card>
-<hr *ngIf="editRow">
 
+        <hr *ngIf="editRow">
   <div *ngIf="editRow" class="jumbotron">
     <h1 class="display-4">Reply</h1>
       <br>
@@ -89,9 +132,17 @@
             <br>
           </div>
         </div>
-      <hr>
-      <p class="lead">{{selectedMessage.message}}</p>
         <hr>
+      <div *ngIf="showFbIcon()">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      </div>
+      <div *ngIf="!showFbIcon()">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      </div>
+      <div></div>
+
+      <p class="lead">{{selectedMessage.message}}</p>
+     <hr>
           <p class="lead">
             <button (click)="sendMessage()" type="button" class="btn btn-success btn-lg "> Send </button>
           </p>
