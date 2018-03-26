@@ -9,43 +9,34 @@
         <mat-table #table [dataSource]="userDataSource" matSort>
 
           <ng-container matColumnDef="firstName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+            <mat-header-cell fxFlex="125px" *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
+            <mat-cell fxFlex="125px" *matCellDef="let row"> {{row.firstName}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="lastName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+            <mat-header-cell  fxFlex="125px" *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+            <mat-cell  fxFlex="125px" *matCellDef="let row"> {{row.lastName}} </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="loginId">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Login Id</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.loginId}} </mat-cell>
+            <mat-header-cell fxFlex="225px" *matHeaderCellDef mat-sort-header> Login Id</mat-header-cell>
+            <mat-cell fxFlex="225px" *matCellDef="let row"> {{row.loginId}} </mat-cell>
           </ng-container>
 
          <ng-container matColumnDef="createdTime">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
-            <mat-cell *matCellDef="let row">{{ row.createdTime | date }}</mat-cell>
+            <mat-header-cell fxFlex="175px" *matHeaderCellDef mat-sort-header> Created </mat-header-cell>
+            <mat-cell fxFlex="175px" *matCellDef="let row">{{ row.createdTime | date }}</mat-cell>
           </ng-container>
 
-          <ng-container matColumnDef="edit">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
-              <mat-cell *matCellDef="let row">
+    <!--      <ng-container matColumnDef="edit">
+              <mat-header-cell fxFlex="175px" *matHeaderCellDef mat-sort-header> Edit </mat-header-cell>
+              <mat-cell fxFlex="175px" *matCellDef="let row">
                   <button (click)="onSelect(row)" class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="Edit User" type="button">
                     <i  class="fa fa-pencil" aria-hidden="true"></i>
                   </button>
               </mat-cell>
-          </ng-container>
+          </ng-container>  -->
 
-    <!--      <button mat-button ><i  class="fa fa-pencil" aria-hidden="true"></i></button>
-          <button (click)="onSelect(row)" class="btn btn-primary btn-simple btn-xs" rel="tooltip" title="Edit User" type="button">
-              <i  class="fa fa-pencil" aria-hidden="true"></i>
-              </button>
-
-          <ng-container matColumnDef="delete">
-              <mat-header-cell *matHeaderCellDef > Delete </mat-header-cell>
-              <mat-cell> <i (click)="onSelect(row)" class="fa fa-envelope-o" aria-hidden="true"></i> </mat-cell>
-            </ng-container>  -->
 
             <ng-container matColumnDef="actionsColumn">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Edit &nbsp; &nbsp; Delete</mat-header-cell>

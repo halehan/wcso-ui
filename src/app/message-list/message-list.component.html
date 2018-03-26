@@ -12,7 +12,7 @@
           <div class="blocks" fxFlex = "25%">2</div>
           <div class="blocks" fxFlex = "25%">3</div>
           <div class="blocks" fxFlex = "25%">4</div>
-          <div class="blocks" fxFlex>3</div>
+
         </div>
       </div>  -->
 
@@ -42,24 +42,24 @@
       </ng-container>
 
       <ng-container matColumnDef="threadId">
-        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="140px"> ThreadId </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="140px"> ConversationId </mat-header-cell>
         <mat-cell fxFlex="140px" id={{getClass(row)}} *matCellDef="let row"> {{row.threadId}}   </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="created">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="200px"> Created </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="180px"> Created </mat-header-cell>
      <!--     <mat-cell *matCellDef="let row"> {{row.createdTime | date: 'medium'}} </mat-cell>  -->
-          <mat-cell id={{getClass(row)}} fxFlex="200px" *matCellDef="let row"> {{row.createdTime | dateFormat}} </mat-cell>
+          <mat-cell id={{getClass(row)}} fxFlex="180px" *matCellDef="let row"> {{row.createdTime | dateFormat}} </mat-cell>
        </ng-container>
 
       <ng-container matColumnDef="address">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
-          <mat-cell  id={{getClass(row)}} *matCellDef="let row">{{ row.address}}</mat-cell>
+          <mat-header-cell fxFlex="225px" *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+          <mat-cell fxFlex="225px"  id={{getClass(row)}} *matCellDef="let row">{{ row.address}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="reply">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px"> Reply </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlex="60px">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="50px"> Reply </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex="50px">
               <button  mat-icon-button color="primary" focusable="false" disabled="{{!showFbIconRow(row)}}" (click)="onSelect(row)">
                     <i class="fa fa-pencil mat-icon"></i>
               </button>
@@ -67,8 +67,8 @@
       </ng-container>
 
       <ng-container matColumnDef="close">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px"> Close Thread </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlex="60px">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="50px"> Close  </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex="50px">
               <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="closeThread(row)">
                   <i class="fa fa-times mat-icon"></i>
               </button>
@@ -76,8 +76,8 @@
       </ng-container>
 
       <ng-container matColumnDef="attachment">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px"> Attachment </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlex="60px">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="65px"> Attachment </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex="65px">
               <button   *ngIf="row.attachmentUrl" mat-icon-button color="primary" focusable="false" (click)="showAttachmentComponent(row)">
                   <i  class="fa fa-file-image-o"></i>
               </button>
