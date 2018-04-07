@@ -1,12 +1,12 @@
 <div class="col-sm-12 col-md-12">
-       
+
 </div>
 <div class="container" style="margin-top:100px">
     <div class="row">
       <div class="Absolute-Center is-Responsive">
             <div class="col-sm-12 col-md-12 col-md-offset-1">
             <div class="panel panel-default">
-               
+
                 <div class="panel-body">
                     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
                         <fieldset>
@@ -22,8 +22,8 @@
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
-                                            </span> 
-                                           
+                                            </span>
+
                                             <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
                                             <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
                                      </div>
@@ -33,9 +33,9 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-lock"></i>
                                             </span>
-                                           
+
                                             <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-                                            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                                            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required sir</div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -46,10 +46,10 @@
                             </div>
                             <div *ngIf="error" class="alert alert-danger">{{error}}</div>
                         </fieldset>
-                        
+
                     </form>
                 </div>
-                
+
                 <div class="panel-footer ">
                                 Don't have an account!<a [routerLink]="['/register']" class="btn btn-link">Register</a>
                              <!--   <a [routerLink]="['/dash']" class="btn btn-link">Dashboard</a> -->
@@ -60,7 +60,7 @@
     </div>
 </div>
 <!--
-    
+
 
 <div class="container">
 <div class="col-sm-8 col-sm-offset-2">
