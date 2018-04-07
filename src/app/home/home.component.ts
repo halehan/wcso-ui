@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import {MatTableDataSource , MatSort} from '@angular/material';
 
 import { User } from '../model/index';
 import { Message } from '../model/index';
@@ -9,7 +10,7 @@ import { NavbarService } from '../navbar/navbar.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
     this.nav.profileActive = '';
     this.nav.show();
       // get messages from secure api end point
-      this.messageService.getAll()
+    /*  this.messageService.getAll()
           .subscribe(messages => {
               this.messages = messages;
           });
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
           this.userService.getAll()
           .subscribe(users => {
               this.users = users;
-          });
+          });  */
   }
 
 }
