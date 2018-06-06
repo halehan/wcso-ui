@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable } from 'rxjs';
 import { Constants } from '../util/constants';
 
 @Injectable()
@@ -15,14 +16,16 @@ export class ContentService {
   }
 */
 
-  getByKey(id: number) {
-    return this.http.get(Constants.SERVER_URL + 'content' + id, this.jwt()).map((response: Response) =>
+
+
+  getByKey(key: string) {
+    return this.http.get(Constants.SERVER_URL + 'api/content/' + key, this.jwt()).map((response: Response) =>
       response.json()).catch(this.handleError);
   }
 
   private handleError (error: Response | any) {
-    console.error('messageService::handleError' + error);
-    return Observable.throw(error);
+    console.error('contentService::handleError' + error);
+    return observableThrowError(error);
   }
 
   private jwt() {

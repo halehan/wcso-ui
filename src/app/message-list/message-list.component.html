@@ -1,6 +1,6 @@
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAGZ6xu-PUDubQLdxQvBl5DeJgXscWEbPo"></script>
 <div >
-    <div class="example-header">
+    <div class="example-header" style="padding-left: 1cm;">
       <mat-form-field>
         <input matInput (keyup)="applyMessageFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
@@ -19,8 +19,8 @@
     <mat-table #table [dataSource]="messageDataSource" matSort>
 
         <ng-container matColumnDef="from">
-            <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="50px" > From </mat-header-cell>
-            <mat-cell fxFlex="50px" *matCellDef="let row">
+            <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px" > From </mat-header-cell>
+            <mat-cell fxFlex="60px" *matCellDef="let row">
               <button *ngIf="showFbIconRow(row)" mat-icon-button color="blue" focusable="false" >
                   <i class="fa fa-facebook-square" aria-hidden="true"></i>
               </button>
@@ -41,10 +41,10 @@
         <mat-cell  fxFlex="300px"  id={{getClass(row)}}   *matCellDef="let row"> {{row.message}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="threadId">
+ <!--     <ng-container matColumnDef="threadId">
         <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="140px"> ConversationId </mat-header-cell>
         <mat-cell fxFlex="140px" id={{getClass(row)}} *matCellDef="let row"> {{row.threadId}}   </mat-cell>
-      </ng-container>
+      </ng-container>  -->
 
       <ng-container matColumnDef="created">
           <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="180px"> Created </mat-header-cell>
@@ -53,13 +53,13 @@
        </ng-container>
 
       <ng-container matColumnDef="address">
-          <mat-header-cell fxFlex="225px" *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
-          <mat-cell fxFlex="225px"  id={{getClass(row)}} *matCellDef="let row">{{ row.address}}</mat-cell>
+          <mat-header-cell fxFlex="275px" *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+          <mat-cell fxFlex="275px"  id={{getClass(row)}} *matCellDef="let row">{{ row.address}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="reply">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="50px"> Reply </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlex="50px">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="40px"> Reply </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex="40px">
               <button  mat-icon-button color="primary" focusable="false" disabled="{{!showFbIconRow(row)}}" (click)="onSelect(row)">
                     <i class="fa fa-pencil mat-icon"></i>
               </button>
@@ -67,8 +67,8 @@
       </ng-container>
 
       <ng-container matColumnDef="close">
-          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="50px"> Close  </mat-header-cell>
-          <mat-cell *matCellDef="let row" fxFlex="50px">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="40px"> Close  </mat-header-cell>
+          <mat-cell *matCellDef="let row" fxFlex="40px">
               <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="closeThread(row)">
                   <i class="fa fa-times mat-icon"></i>
               </button>

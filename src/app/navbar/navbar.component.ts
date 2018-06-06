@@ -7,7 +7,7 @@ import { NavbarService } from './navbar.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  test = ' Social Media Messenger';
+  appTitle = ' Social Media Messenger';
   homeActive = '';
   dashActive = '';
   profileActive = '';
@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.vis = this.nav.getVisible();
-    this.styleCls = ((this.nav.getVisible()) ? '' : 'hiden');
     this.styleCls = ((this.nav.getVisible()) ? '' : 'hiden');
 
     this.homeActive = this.nav.getHomeActive();

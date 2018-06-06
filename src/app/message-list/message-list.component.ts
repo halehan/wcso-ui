@@ -4,8 +4,7 @@ import { Message } from '../model/index';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Observable';
+import { Subscription , Observable} from 'rxjs';
 import { SimpleTimer } from 'ng2-simple-timer';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
@@ -20,7 +19,7 @@ import { AgmCoreModule } from '@agm/core';
 export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy {
   public editRow: boolean;
   public showAttachment: boolean;
-  displayedColumns = ['from', 'message', 'threadId', 'created', 'address', 'reply', 'close', 'attachment'];
+  displayedColumns = ['from', 'message',  'created', 'address', 'reply', 'close', 'attachment'];
   messageDataSource = new MatTableDataSource();
   subscription: Subscription;
   selectedMessage: Message;
@@ -88,7 +87,7 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
      // get messages from secure api end point
   // this.subscription = this.messageService.getAll().subscribe(message => { this.messages = message; });
   this.findAll();
-  this.st.newTimer('timeout', 20);
+  this.st.newTimer('timeout', 5);
   this.timerId = this.st.subscribe('timeout', () => this.findAll());
 
   }

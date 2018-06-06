@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {FormsModule} from '@angular/forms';
 import { Component, OnInit, ViewChild  } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import { UserService } from '../services/user.service';
 import { User } from '../model/index';
 import { ToastrService } from 'ngx-toastr';

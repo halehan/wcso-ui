@@ -1,7 +1,8 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+
 
 import { AuthenticationService } from './authentication.service';
 import { Message } from '../model/index';
@@ -37,7 +38,7 @@ getById(id: number) {
 
 private handleError (error: Response | any) {
   console.error('messageService::handleError' + error);
-  return Observable.throw(error);
+  return observableThrowError(error);
 }
 
    private jwt() {

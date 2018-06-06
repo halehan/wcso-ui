@@ -11,6 +11,7 @@ import { MessageService } from './services/message.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService} from './services/alert.service';
 import { NavbarService } from './navbar/navbar.service';
+import { ContentService } from './services/content.service';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
@@ -136,6 +137,7 @@ import { DateFormatPipe } from './date-format.pipe';
     AuthenticationService,
     UserService,
     MessageService,
+    ContentService,
     AlertService,
     NavbarService,
     SimpleTimer,

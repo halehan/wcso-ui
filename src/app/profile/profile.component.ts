@@ -5,12 +5,12 @@ import { NavbarService } from '../navbar/navbar.service';
 import { UserService } from '../services/user.service';
 import { AlertService } from '../services/alert.service';
 import { User } from '../model/index';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {} from 'jquery';
 import { ToastrService } from 'ngx-toastr';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+
+
+
 
 declare var $: any;
 

@@ -1,8 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import {MatTableDataSource , MatSort} from '@angular/material';
 import {DataSource} from '@angular/cdk/collections';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { User } from '../../model/index';
 import { ToastrService } from 'ngx-toastr';
