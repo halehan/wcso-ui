@@ -7,7 +7,7 @@ import { NavbarService } from './navbar.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  appTitle = ' Social Media Messenger';
+  appTitle = ' Law Enforcement On-Demand ';
   homeActive = '';
   dashActive = '';
   profileActive = '';

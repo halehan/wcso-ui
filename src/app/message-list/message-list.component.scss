@@ -1,6 +1,8 @@
 .card {
-  width: 1110px;
+
   padding-bottom: 25px;
+  padding-left: 125px;
+  max-width: 400px;
 }
 
 .hr {
@@ -15,14 +17,25 @@
   min-width: 300px;
 }
 
+.mat-icon{
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
 .mat-table {
   overflow: auto;
   max-height: 800px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .mat-header-cell.mat-sort-header-sorted {
   color: black;
 }
+
+.mat-row{
+  min-height: 1px;
+}
+
 
 .dark-modal .modal-content {
   background-color: #292b2c;
@@ -54,5 +67,16 @@
 }
 
 #wcso {
-  color: green;
+  color: #03a9f4b5;
+}
+
+.mat-card img{
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 80%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 60%;
+  padding-left: 15pc;
+}
+
+.mat-card title{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }

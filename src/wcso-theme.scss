@@ -9,7 +9,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$candy-app-primary: mat-palette($mat-teal);
+$candy-app-primary: mat-palette($mat-light-blue);
 $candy-app-accent:  mat-palette($mat-green, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -26,8 +26,8 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 .alternate-theme {
     $alternate-primary: mat-palette($mat-light-blue);
     $alternate-accent:  mat-palette($mat-yellow, 400);
-  
+
     $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
-  
+
     @include angular-material-theme($alternate-theme);
   }

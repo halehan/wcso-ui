@@ -8,6 +8,7 @@ import {HttpModule } from '@angular/http';
 import { AuthGuard } from './guards/index';
 import { UserService } from './services/user.service';
 import { MessageService } from './services/message.service';
+import { SmsMessageService } from './services/smsmessage.service';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService} from './services/alert.service';
 import { NavbarService } from './navbar/navbar.service';
@@ -45,6 +46,7 @@ import {
   MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
+  MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule,
@@ -117,6 +119,8 @@ import { DateFormatPipe } from './date-format.pipe';
     MomentModule,
     routing,
     MatButtonModule,
+    MatDividerModule,
+    MatExpansionModule,
     MatCheckboxModule,
     MatCardModule,
     MatToolbarModule,
@@ -137,6 +141,7 @@ import { DateFormatPipe } from './date-format.pipe';
     AuthenticationService,
     UserService,
     MessageService,
+    SmsMessageService,
     ContentService,
     AlertService,
     NavbarService,

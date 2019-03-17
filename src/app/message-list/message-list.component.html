@@ -1,4 +1,14 @@
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAGZ6xu-PUDubQLdxQvBl5DeJgXscWEbPo"></script>
+<mat-accordion>
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+              <img src="../../assets/facebook.48.png"  >
+
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 <div >
     <div class="example-header" style="padding-left: 1cm;">
       <mat-form-field>
@@ -6,17 +16,7 @@
       </mat-form-field>
     </div>
 
- <!--   <div class="container">
-        <div fxLayout="row" fxLayoutAlign="start center" class="content">
-          <div class="blocks" fxFlex = "25%">1</div>
-          <div class="blocks" fxFlex = "25%">2</div>
-          <div class="blocks" fxFlex = "25%">3</div>
-          <div class="blocks" fxFlex = "25%">4</div>
-
-        </div>
-      </div>  -->
-
-    <mat-table #table [dataSource]="messageDataSource" matSort>
+    <mat-table class= #table [dataSource]="messageDataSource" matSort>
 
         <ng-container matColumnDef="from">
             <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px" > From </mat-header-cell>
@@ -41,14 +41,8 @@
         <mat-cell  fxFlex="300px"  id={{getClass(row)}}   *matCellDef="let row"> {{row.message}} </mat-cell>
       </ng-container>
 
- <!--     <ng-container matColumnDef="threadId">
-        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="140px"> ConversationId </mat-header-cell>
-        <mat-cell fxFlex="140px" id={{getClass(row)}} *matCellDef="let row"> {{row.threadId}}   </mat-cell>
-      </ng-container>  -->
-
       <ng-container matColumnDef="created">
           <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="180px"> Created </mat-header-cell>
-     <!--     <mat-cell *matCellDef="let row"> {{row.createdTime | date: 'medium'}} </mat-cell>  -->
           <mat-cell id={{getClass(row)}} fxFlex="180px" *matCellDef="let row"> {{row.createdTime | dateFormat}} </mat-cell>
        </ng-container>
 
@@ -84,23 +78,6 @@
           </mat-cell>
       </ng-container>
 
-    <!--  <ng-container matColumnDef="actionsColumn">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Reply &nbsp; &nbsp; Close Thread &nbsp; Attachment</mat-header-cell>
-
-          <mat-cell *matCellDef="let row">
-            <button  mat-icon-button color="primary" focusable="false" disabled="{{!showFbIconRow(row)}}" (click)="onSelect(row)">
-                  <i class="fa fa-pencil mat-icon"></i>
-            </button>
-            <button  style="padding-left: 30px;" *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="closeThread(row)">
-                    <i class="fa fa-times mat-icon"></i>
-            </button>
-            <button style="padding-left: 60px;"  *ngIf="row.attachmentUrl" mat-icon-button color="primary" focusable="false" (click)="showAttachmentComponent(row)">
-                <i  class="fa fa-file-image-o"></i>
-            </button>
-          </mat-cell>
-        </ng-container>
-      -->
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
@@ -111,15 +88,19 @@
                    [pageSizeOptions]="[5, 10, 25, 100]">
     </mat-paginator>
     <br>
+
+
+    <mat-card *ngIf="showAttachment" class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Attachment Regarding Thread {{selectedMessage.threadId}}</mat-card-title>
+        <mat-card-subtitle>Uploaded {{selectedMessage.createdTime | dateFormat}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src={{selectedMessage.attachmentUrl}} alt="Photo">
+    </mat-card>
+
     <br>
 
-      <mat-card *ngIf="showAttachment" class="card">
-          <mat-card-header>
-            <mat-card-title>Attachment Regarding Thread {{selectedMessage.threadId}}</mat-card-title>
-            <mat-card-subtitle>Uploaded {{selectedMessage.createdTime | dateFormat}}</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src={{selectedMessage.attachmentUrl}} alt="Photo">
-        </mat-card>
 
         <hr *ngIf="editRow">
   <div *ngIf="editRow" class="jumbotron">
@@ -148,4 +129,135 @@
           </p>
   </div>
 </div>
+</mat-expansion-panel>
 
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          <img src="../../assets/sms.48.png"  >
+      </mat-panel-title>
+      <mat-panel-description>
+       Read Text Messages
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div >
+      <div class="example-header" style="padding-left: 1cm;">
+        <mat-form-field>
+          <input matInput (keyup)="applyMessageFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-table class= #table [dataSource]="SmsMessageDataSource" matSort>
+
+      <ng-container matColumnDef="from">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px" > From </mat-header-cell>
+          <mat-cell fxFlex="60px" *matCellDef="let row">
+            <button *ngIf="showFbIconRow(row)" mat-icon-button color="blue" focusable="false" >
+                <i class="fa fa-facebook-square" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="!showFbIconRow(row) && !showTwitterIconRow(row)" mat-icon-button color="blue" focusable="false" >
+                <img src="../assets/dcccd-police-black.svg" alt="WCSO">
+            </button>
+            <button *ngIf="showTwitterIconRow(row)" mat-icon-button color="blue" focusable="false" >
+                <i class="fa fa-twitter-square" aria-hidden="true"></i>
+            </button>
+          </mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="message">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="300px"> Message </mat-header-cell>
+        <button  mat-icon-button color="primary" focusable="false" >
+          <i class="fa fa-pencil mat-icon"></i>
+        </button>
+      <mat-cell  fxFlex="300px"  id={{getClass(row)}}   *matCellDef="let row"> {{row.message}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="180px"> Created </mat-header-cell>
+        <mat-cell id={{getClass(row)}} fxFlex="180px" *matCellDef="let row"> {{row.createdTime | dateFormat}} </mat-cell>
+     </ng-container>
+
+    <ng-container matColumnDef="address">
+        <mat-header-cell fxFlex="275px" *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+        <mat-cell fxFlex="275px"  id={{getClass(row)}} *matCellDef="let row">{{ row.address}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reply">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="40px"> Reply </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="40px">
+            <button  mat-icon-button color="primary" focusable="false" disabled="{{!showFbIconRow(row)}}" (click)="onSelect(row)">
+                  <i class="fa fa-pencil mat-icon"></i>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="close">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="40px"> Close  </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="40px">
+            <button *ngIf="!row.editing" mat-icon-button color="primary" focusable="false" (click)="closeThread(row)">
+                <i class="fa fa-times mat-icon"></i>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="attachment">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="65px"> Attachment </mat-header-cell>
+        <mat-cell *matCellDef="let row" fxFlex="65px">
+            <button   *ngIf="row.attachmentUrl" mat-icon-button color="primary" focusable="false" (click)="showAttachmentComponent(row)">
+                <i  class="fa fa-file-image-o"></i>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+
+  <mat-paginator [length]="100"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+  <br>
+
+    </mat-expansion-panel>
+
+
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <img src="../../assets/twitter.48.png"  >
+        </mat-panel-title>
+        <mat-panel-description>
+         Read Twitter Messages
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div >
+        <div class="example-header" style="padding-left: 1cm;">
+          <mat-form-field>
+            <input matInput (keyup)="applyMessageFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+        </div>
+      </div>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                  <img src="../../assets/instagram.48.png"  >
+              </mat-panel-title>
+              <mat-panel-description>
+               Read Instagram Messages
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            </mat-expansion-panel>
+
+
+</mat-accordion>

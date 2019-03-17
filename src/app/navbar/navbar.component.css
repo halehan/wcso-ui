@@ -3,7 +3,7 @@ body {
     padding-top: 3.5rem;
   }
 
-  .bg-inverse {background-color: #27880d !important;}
+  .bg-inverse {background-color: white  !important;}
 
   .fade-out {
     visibility: hidden;
@@ -19,6 +19,10 @@ body {
 
  .hiden{
     display:none;
+}
+
+.blueText {
+  color: #03a9f4b5;
 }
 
 .text-right {text-align:right;}

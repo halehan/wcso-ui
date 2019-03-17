@@ -3,6 +3,7 @@ import {MatPaginator, MatTableDataSource , MatSort, MatMenu, MatCard} from '@ang
 import { Message } from '../model/index';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
+import { SmsMessageService } from '../services/smsmessage.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription , Observable} from 'rxjs';
 import { SimpleTimer } from 'ng2-simple-timer';
@@ -21,12 +22,15 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
   public showAttachment: boolean;
   displayedColumns = ['from', 'message',  'created', 'address', 'reply', 'close', 'attachment'];
   messageDataSource = new MatTableDataSource();
+  SmsMessageDataSource = new MatTableDataSource();
   subscription: Subscription;
   selectedMessage: Message;
   newMessage: Message;
   messages: Message[] = [];
+  smsMessages: Message[] = [];
   observableMessages: Observable<Message[]>;
   timerId: string;
+  panelOpenState = false;
   @Input() name;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -34,7 +38,8 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
-  constructor(private messageService: MessageService, private toastr: ToastrService, private st: SimpleTimer,
+  constructor(private messageService: MessageService, private smsMessageService: SmsMessageService,
+    private toastr: ToastrService, private st: SimpleTimer,
     private modalService: NgbModal, private ngZone: NgZone) {
    }
 
@@ -67,6 +72,7 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
     this.newMessage.threadStatus = 'open';
     this.newMessage.message = '';
     this.editRow = true;
+    this.showAttachment = false;
 
     console.log(this.selectedMessage.message);
 
@@ -83,10 +89,21 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
 
   }
 
+  findAllSms() {
+
+    this.smsMessageService.getAll()
+    .subscribe(smsMessages => {
+        this.smsMessages = smsMessages;
+        this.SmsMessageDataSource.data = smsMessages;
+    });
+
+  }
+
   ngOnInit() {
      // get messages from secure api end point
   // this.subscription = this.messageService.getAll().subscribe(message => { this.messages = message; });
   this.findAll();
+  this.findAllSms();
   this.st.newTimer('timeout', 5);
   this.timerId = this.st.subscribe('timeout', () => this.findAll());
 
