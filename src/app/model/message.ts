@@ -11,5 +11,7 @@ export class Message {
     address: string;
     attachmentUrl: string;
     from: string;
+    direction: string;
+    to: string;
 
 }

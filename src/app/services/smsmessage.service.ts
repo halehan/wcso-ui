@@ -6,6 +6,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { AuthenticationService } from './authentication.service';
 import { Message } from '../model/index';
+import { TwilioMessagePayload } from '../model/index';
 import { Constants } from '../util/constants';
 
 @Injectable()
@@ -21,7 +22,7 @@ closeThread(message: Message) {
     response.json()).catch(this.handleError);
 }
 
-sendMessage(message: Message) {
+sendMessage(message: TwilioMessagePayload) {
   return this.http.post(Constants.SERVER_URL + 'sms/send', message, this.jwt()).map((response: Response) =>
     response.json()).catch(this.handleError);
 }

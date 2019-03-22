@@ -8,6 +8,7 @@ import { NavbarService } from './navbar.service';
 })
 export class NavbarComponent implements OnInit {
   appTitle = ' Law Enforcement On-Demand ';
+  version = ' 1.02-RC-1';
   homeActive = '';
   dashActive = '';
   profileActive = '';

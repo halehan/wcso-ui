@@ -1,6 +1,8 @@
 import { Component, NgZone, ViewChild, OnInit,  OnDestroy, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';
 import {MatPaginator, MatTableDataSource , MatSort, MatMenu, MatCard} from '@angular/material';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Message } from '../model/index';
+import { TwilioMessagePayload } from '../model/index';
 import { UserService } from '../services/user.service';
 import { MessageService } from '../services/message.service';
 import { SmsMessageService } from '../services/smsmessage.service';
@@ -20,28 +22,51 @@ import { AgmCoreModule } from '@agm/core';
 export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy {
   public editRow: boolean;
   public showAttachment: boolean;
+  public showSmsAttachment: boolean;
   displayedColumns = ['from', 'message',  'created', 'address', 'reply', 'close', 'attachment'];
   messageDataSource = new MatTableDataSource();
   SmsMessageDataSource = new MatTableDataSource();
   subscription: Subscription;
   selectedMessage: Message;
+  selectedSmsMessage: Message;
   newMessage: Message;
+  newSmsMessage: Message;
   messages: Message[] = [];
   smsMessages: Message[] = [];
   observableMessages: Observable<Message[]>;
   timerId: string;
   panelOpenState = false;
+  smsMessageForm: FormGroup;
+  faceBookMessageForm: FormGroup;
+
   @Input() name;
 
   @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  @ViewChild('smsPaginator', {read: MatPaginator}) smsPaginator: MatPaginator;
+
+
 
   constructor(private messageService: MessageService, private smsMessageService: SmsMessageService,
     private toastr: ToastrService, private st: SimpleTimer,
     private modalService: NgbModal, private ngZone: NgZone) {
    }
+
+   ngOnInit() {
+    // get messages from secure api end point
+ // this.subscription = this.messageService.getAll().subscribe(message => { this.messages = message; });
+ this.SmsMessageDataSource.paginator =  this.smsPaginator;
+ this.selectedMessage =  new Message();
+ this.selectedSmsMessage =  new Message();
+ this.findAll();
+ this.findAllSms();
+ this.st.newTimer('timeout', 5);
+ this.timerId = this.st.subscribe('timeout', () => this.findAll());
+ this.timerId = this.st.subscribe('timeout', () => this.findAllSms());
+
+ }
 
    ngOnDestroy() {
     this.st.unsubscribe(this.timerId);
@@ -61,10 +86,15 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
   showAttachmentComponent(message: Message): void {
     this.selectedMessage = message;
     this.showAttachment = true;
+  }
 
+  showSmsAttachmentComponent(message: Message): void {
+    this.selectedSmsMessage = message;
+    this.showSmsAttachment = true;
   }
 
   onSelect(message: Message): void {
+    this.faceBookMessageForm = this.createFormGroup();
     this.selectedMessage = message;
     this.newMessage = new Message();
     this.newMessage.threadId = this.selectedMessage.threadId;
@@ -75,8 +105,32 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
     this.showAttachment = false;
 
     console.log(this.selectedMessage.message);
+  }
 
+  onSelectSms(message: Message): void {
+    this.smsMessageForm = this.createFormGroup();
+    this.selectedSmsMessage = message;
+    this.newSmsMessage = new Message();
+    this.newSmsMessage.threadId = this.selectedSmsMessage.threadId;
+    this.newSmsMessage.messageId = this.selectedSmsMessage.messageId;
+    this.newSmsMessage.from = this.selectedSmsMessage.from;
+    this.newSmsMessage.threadStatus = 'open';
+    this.newSmsMessage.message = '';
+    this.editRow = true;
+    this.showSmsAttachment = false;
 
+    console.log(this.selectedSmsMessage.message);
+
+  }
+
+  createFormGroup() {
+
+    return new FormGroup({
+
+      replyMessage: new FormControl(),
+      sentMessage: new FormControl()
+
+      });
   }
 
   findAll() {
@@ -99,15 +153,7 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
 
   }
 
-  ngOnInit() {
-     // get messages from secure api end point
-  // this.subscription = this.messageService.getAll().subscribe(message => { this.messages = message; });
-  this.findAll();
-  this.findAllSms();
-  this.st.newTimer('timeout', 5);
-  this.timerId = this.st.subscribe('timeout', () => this.findAll());
 
-  }
 
   applyMessageFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -130,9 +176,32 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
       });
 
       this.editRow = false;
-      this.showAttachment = false;
+      this.showSmsAttachment = false;
       this.findAll();
 
+  }
+
+  isObjectEmpty(val) {
+    let rtn  = false;
+    if (val === undefined || val === null) {
+        rtn = true;
+    }
+  return rtn;
+  }
+
+  disableSmsReply(): boolean {
+    let rtn  = false;
+    if (!this.isObjectEmpty(this.selectedSmsMessage)) {
+      rtn = this.selectedSmsMessage.direction === 'outbound-api';
+    }
+
+    return rtn;
+
+  }
+
+  showSmsIconRow(message: Message): boolean {
+    console.log(message.direction);
+    return message.direction === 'outbound-api';
   }
 
   showFbIcon(): boolean {
@@ -166,7 +235,38 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
       timeOut: 2000,
     });
 
+    this.newMessage.message = this.faceBookMessageForm.controls.replyMessage.value;
+
+
     this.messageService.sendMessage(this.newMessage).subscribe(
+      data => {
+        this.toastr.success('Message Sent Successfully', '', {
+          timeOut: 2000,
+        });
+    //    this.findAll();
+      },
+      error => {
+        this.toastr.success('Message Error' + error, 'Message Error', {
+          timeOut: 3000,
+        });
+      });
+
+      this.editRow = false;
+
+  }
+
+  sendSmsMessage() {
+    const smsMessagePayload: TwilioMessagePayload =  new TwilioMessagePayload();
+
+    smsMessagePayload.to = this.newSmsMessage.from;
+    smsMessagePayload.msg =  this.smsMessageForm.controls.replyMessage.value;
+
+
+    this.toastr.info('Sending Message', '', {
+      timeOut: 2000,
+    });
+
+    this.smsMessageService.sendMessage(smsMessagePayload).subscribe(
       data => {
         this.toastr.success('Message Sent Successfully', '', {
           timeOut: 2000,

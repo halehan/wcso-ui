@@ -31,7 +31,8 @@
                   <i class="fa fa-twitter-square" aria-hidden="true"></i>
               </button>
             </mat-cell>
-        </ng-container>
+          </ng-container>
+
 
       <ng-container matColumnDef="message">
         <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="300px"> Message </mat-header-cell>
@@ -101,36 +102,40 @@
 
     <br>
 
-
-        <hr *ngIf="editRow">
+  <form [formGroup]="faceBookMessageForm">
+  <hr *ngIf="editRow">
   <div *ngIf="editRow" class="jumbotron">
     <h1 class="display-4">Reply</h1>
       <br>
         <div class="row">
           <div class="col-md-12">
-              <textarea  class="form-control lead" name="message" required [(ngModel)]="newMessage.message" #message="ngModel" placeholder="Click to Enter Message" matTextareaAutosize matAutosizeMinRows="4"
+              <textarea  class="form-control lead" required formControlName="replyMessage"  placeholder="Click to Enter Message" matTextareaAutosize matAutosizeMinRows="4"
               matAutosizeMaxRows="10" matInput> </textarea>
             <br>
           </div>
         </div>
         <hr>
-      <div *ngIf="showFbIcon()">
+  <!--    <div *ngIf="showFbIcon()">
         <i class="fa fa-facebook-square" aria-hidden="true"></i>
       </div>
       <div *ngIf="!showFbIcon()">
         <i class="fa fa-facebook-square" aria-hidden="true"></i>
-      </div>
+      </div>  -->
       <div></div>
 
-      <p class="lead">{{selectedMessage.message}}</p>
+     <p class="lead">{{selectedMessage.message}}</p>
      <hr>
           <p class="lead">
             <button (click)="sendMessage()" type="button" class="btn btn-success btn-lg "> Send </button>
           </p>
   </div>
-</div>
-</mat-expansion-panel>
 
+  </form>
+
+</div>
+
+
+</mat-expansion-panel>
 
 <mat-expansion-panel>
   <mat-expansion-panel-header>
@@ -152,7 +157,7 @@
 
     <mat-table class= #table [dataSource]="SmsMessageDataSource" matSort>
 
-      <ng-container matColumnDef="from">
+  <!--    <ng-container matColumnDef="from">
           <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="60px" > From </mat-header-cell>
           <mat-cell fxFlex="60px" *matCellDef="let row">
             <button *ngIf="showFbIconRow(row)" mat-icon-button color="blue" focusable="false" >
@@ -165,14 +170,22 @@
                 <i class="fa fa-twitter-square" aria-hidden="true"></i>
             </button>
           </mat-cell>
+      </ng-container> -->
+
+      <ng-container matColumnDef="from">
+        <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="150px"> From </mat-header-cell>
+          <button  mat-icon-button color="primary" focusable="false" >
+            <i class="fa fa-pencil mat-icon"></i>
+          </button>
+        <mat-cell  fxFlex="150px"  id={{getClass(row)}}  *matCellDef="let row"> {{row.from}} </mat-cell>
       </ng-container>
 
     <ng-container matColumnDef="message">
-      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="300px"> Message </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="350px"> Message </mat-header-cell>
         <button  mat-icon-button color="primary" focusable="false" >
           <i class="fa fa-pencil mat-icon"></i>
         </button>
-      <mat-cell  fxFlex="300px"  id={{getClass(row)}}   *matCellDef="let row"> {{row.message}} </mat-cell>
+      <mat-cell  fxFlex="350px"  id={{getClass(row)}}   *matCellDef="let row"> {{row.message}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="created">
@@ -181,14 +194,15 @@
      </ng-container>
 
     <ng-container matColumnDef="address">
-        <mat-header-cell fxFlex="275px" *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
-        <mat-cell fxFlex="275px"  id={{getClass(row)}} *matCellDef="let row">{{ row.address}}</mat-cell>
+        <mat-header-cell fxFlex="125px" *matHeaderCellDef mat-sort-header> From City </mat-header-cell>
+        <mat-cell fxFlex="125px"  id={{getClass(row)}} *matCellDef="let row">{{ row.fromCity}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="reply">
         <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="40px"> Reply </mat-header-cell>
         <mat-cell *matCellDef="let row" fxFlex="40px">
-            <button  mat-icon-button color="primary" focusable="false" disabled="{{!showFbIconRow(row)}}" (click)="onSelect(row)">
+         <!--   <button  mat-icon-button color="primary" focusable="false" disabled="{{disableSmsReply(row)}}" (click)="onSelect(row)">  -->
+                <button  mat-icon-button color="primary" focusable="false"  disabled="{{showSmsIconRow(row)}}" (click)="onSelectSms(row)">
                   <i class="fa fa-pencil mat-icon"></i>
             </button>
         </mat-cell>
@@ -206,7 +220,7 @@
     <ng-container matColumnDef="attachment">
         <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="65px"> Attachment </mat-header-cell>
         <mat-cell *matCellDef="let row" fxFlex="65px">
-            <button   *ngIf="row.attachmentUrl" mat-icon-button color="primary" focusable="false" (click)="showAttachmentComponent(row)">
+            <button   *ngIf="row.attachmentUrl" mat-icon-button color="primary" focusable="false" (click)="showSmsAttachmentComponent(row)">
                 <i  class="fa fa-file-image-o"></i>
             </button>
         </mat-cell>
@@ -217,13 +231,57 @@
 
   </mat-table>
 
-  <mat-paginator [length]="100"
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 25, 100]">
-  </mat-paginator>
+
+        <mat-paginator #smsPaginator
+                [length]="100"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+        <br>
+
+  <mat-card *ngIf="showSmsAttachment" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Attachment Regarding Thread {{selectedSmsMessage.threadId}}</mat-card-title>
+      <mat-card-subtitle>Uploaded {{selectedSmsMessage.createdTime | dateFormat}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src={{selectedSmsMessage.attachmentUrl}} alt="Photo">
+  </mat-card>
+
   <br>
 
-    </mat-expansion-panel>
+  <form [formGroup]="smsMessageForm">
+  <hr *ngIf="editRow">
+  <div *ngIf="editRow" class="jumbotron">
+    <h1 class="display-4">Reply</h1>
+      <br>
+        <div class="row">
+          <div class="col-md-12">
+              <textarea type="text" class="form-control lead" required  formControlName="replyMessage" placeholder="Click to Enter Message" matTextareaAutosize matAutosizeMinRows="14"
+              matAutosizeMaxRows="10" matInput> </textarea>
+            <br>
+          </div>
+        </div>
+        <hr>
+  <!--    <div *ngIf="showFbIcon()">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      </div>
+      <div *ngIf="!showFbIcon()">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      </div> -->
+      <div></div>
+
+      <p class="lead">{{selectedSmsMessage.message}}</p>
+     <hr>
+          <p class="lead">
+            <button (click)="sendSmsMessage()" type="button" class="btn btn-success btn-lg "> Send </button>
+          </p>
+  </div>
+  </form>
+
+
+
+</mat-expansion-panel>
 
 
 
