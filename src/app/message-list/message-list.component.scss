@@ -1,60 +1,129 @@
-.card {
 
-  padding-bottom: 25px;
-  padding-left: 125px;
-  max-width: 400px;
-}
+  .form-control{
 
-.hr {
-  border: 0;
-  border-top: 1px solid #8c8c8c;
-  border-bottom: 1px solid #fff;
-}
+    font-size: 13px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 
-.example-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-}
+  }
 
-.mat-icon{
-  padding-left: 4px;
-  padding-right: 4px;
-}
+  .label-small {
+    vertical-align: super;
+    font-size: 13px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
 
-.mat-table {
-  overflow: auto;
-  max-height: 800px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
+  .ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
 
-.mat-header-cell.mat-sort-header-sorted {
-  color: black;
-}
-
-.mat-row{
-  min-height: 1px;
-}
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }
 
 
-.dark-modal .modal-content {
-  background-color: #292b2c;
-  color: white;
-}
-.dark-modal .close {
-  color: white;
-}
+  .gap{
+    padding-top: 15px;
+    padding-left: 10px;
+  }
 
 
-.mat-cell,
-.mat-header-cell {
-  flex: 0 0 30%;
-}
+  .new-po {
+    padding-left: 700px;
 
-.mat-column-Actions {
-  flex: 0 0 100px !important;
-  white-space: unset !important;
-}
+  }
+
+  .mat-cell{
+    font-size: 12px;
+    min-height: 1px;
+  }
+
+  .mat-cell:first-child{
+
+  }
+
+  .mat-footer-row{
+    width: 960px;
+    min-height: 30px;
+  }
+
+  .mat-header-row{
+    width: 960px;
+    min-height: 30px;
+
+  }
+
+  .mat-row{
+    width: 960px;
+    min-height: 30px;
+
+
+  }
+
+  .mat-header-cell{
+    width: 960px;
+
+  }
+
+  .mat-table{
+    width: 960px;
+  }
+
+
+  .mat-icon{
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .mat-icon-button {
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+  }
+
+
+  .mat-toolbar {
+    width: 950px;
+    height: 30px;
+    padding-bottom: 4px;
+  }
+
+  .mat-row:hover {
+    background-color: #70c3e9b5;
+  }
+
+  .mat-row:active {
+    background-color: #03a9f4b5
+  }
+
+  .mat-card img{
+    object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+    width: 70%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+    height: 35%;
+  }
+
+  .pull-left {
+    padding-left: 0px;
+  }
+
+  .card-body{
+
+    padding: .5rem;
+    width: 980px;
+  }
+
+  .card-header{
+    font-size: 1.00rem;
+    font-weight: 500;
+    width: 980px;
+    background-color: #03a9f4b5;
+
+  }
+
+  .card{
+    width: 980px;
+    margin-left: -15px;
+  }
+
 
 #facebook {
   color:blue;
@@ -70,13 +139,14 @@
   color: #03a9f4b5;
 }
 
-.mat-card img{
-  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
-  width: 80%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
-  height: 60%;
-  padding-left: 15pc;
+.tp-card {
+  margin-top: 15px;
+
+}
+.tp-header-image {
+  background-image: url('https://www.tutorialspoint.com/materialize/src/html5-mini-logo.jpg');
+  background-size: cover;
 }
 
-.mat-card title{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
+
+

@@ -1,0 +1,95 @@
+.card {
+
+  padding-bottom: 25px;
+  padding-left: 125px;
+  max-width: 400px;
+}
+
+.hr {
+  border: 0;
+  border-top: 1px solid #8c8c8c;
+  border-bottom: 1px solid #fff;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mat-icon{
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.mat-table {
+  width: 950px;
+  max-height: 800px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.mat-header-cell.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-row{
+  min-height: 1px;
+}
+
+
+.dark-modal .modal-content {
+  background-color: #292b2c;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+
+.mat-cell:first-child,
+.mat-footer-cell:first-child,
+.mat-header-cell:first-child {
+  padding-left: 14px;
+}
+
+
+.mat-cell,
+.mat-header-cell {
+  flex: 0 0 30%;
+
+}
+
+.mat-column-Actions {
+  flex: 0 0 100px !important;
+  white-space: unset !important;
+}
+
+#facebook {
+  color:blue;
+  font-style: italic;
+  font-weight: normal;
+}
+
+#twitter {
+  color:blue;
+}
+
+#wcso {
+  color: #03a9f4b5;
+}
+
+.mat-card img{
+  object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+  width: 80%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 60%;
+  padding-left: 15pc;
+}
+
+.mat-card title{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+
+.card-body{
+  padding: .5rem;
+  margin-left: -25px;
+}

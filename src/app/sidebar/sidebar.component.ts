@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarService } from './navbar.service';
+import { NavbarService } from '../navbar/navbar.service';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class SidebarComponent implements OnInit {
+
   appTitle = ' Law Enforcement On-Demand ';
-  version = ' 1.03-RC-1';
+  version = ' 1.02-RC-1';
   homeActive = '';
   dashActive = '';
   profileActive = '';

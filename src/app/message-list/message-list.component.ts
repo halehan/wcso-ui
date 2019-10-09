@@ -11,6 +11,7 @@ import { Subscription , Observable} from 'rxjs';
 import { SimpleTimer } from 'ng2-simple-timer';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule } from '@agm/core';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-message-list',
@@ -38,6 +39,7 @@ export class MessageListComponent implements OnInit,  AfterViewInit,  OnDestroy 
   panelOpenState = false;
   smsMessageForm: FormGroup;
   faceBookMessageForm: FormGroup;
+
 
   @Input() name;
 

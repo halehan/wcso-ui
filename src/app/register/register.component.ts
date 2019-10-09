@@ -32,13 +32,12 @@ export class RegisterComponent implements OnInit {
     private alertService: AlertService,
     private fb: FormBuilder) {
       this.complexForm = fb.group({
-        'firstName' : [null, Validators.required],
-        'lastName': [null, Validators.required],
-        'loginId' : [null, Validators.required],
-        'password' : [null, Validators.compose([Validators.required, Validators.minLength(2)])],
-        'phoneMobile' : [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])]
+        'firstName' :   [null, Validators.required],
+        'lastName':     [null, Validators.required],
+        'loginId' :     [null, Validators.required],
+        'password' :    [null, Validators.compose([Validators.required, Validators.minLength(2)])],
+        'phoneMobile' : []
       })
-
 
     }
 

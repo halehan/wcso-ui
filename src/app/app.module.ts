@@ -106,7 +106,7 @@ import { DateFormatPipe } from './date-format.pipe';
     // Optionally you can set time for `idle`, `timeout` and `ping` in seconds.
     // Default values: `idle` is 600 (10 minutes), `timeout` is 300 (5 minutes)
     // and `ping` is 120 (2 minutes).
-    UserIdleModule.forRoot({idle: 600, timeout: 300, ping: 12}),
+    UserIdleModule.forRoot({idle: 1800, timeout: 300, ping: 12}),
     NgbModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 20000,
